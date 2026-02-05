@@ -13,23 +13,31 @@
     </div>
     <div>
       <p class="italic text-xs">Data Sources: 
-        <a class="underline text-green text-primary" href="https://data.giss.nasa.gov/gistemp/" target="_blank">Nasa Gistemp</a>,
+        <a class="underline text-green text-customPrimary" href="https://data.giss.nasa.gov/gistemp/" target="_blank">Nasa Gistemp</a>,
         <a class="underline text-green text-primary" href="https://berkeleyearth.org/data/" target="_blank">Berkeley Earth</a>
       </p>
     </div>
+
+    <Dialog v-if="activeAnnotation" v-model:visible="activeAnnotation" modal :header="annotationDetails[activeAnnotation].title" :style="{ width: '25rem' }">
+      <h3 class="mb-4 text-lg italic font-[Rethink_Sans]">{{ annotationDetails[activeAnnotation].subtitle }}</h3>
+      <p class="text-sm">{{ annotationDetails[activeAnnotation].description }}</p>
+    </Dialog>
   </div>
 </template>
 
 <script setup>
 
 import * as d3 from 'd3'
-import ToggleSwitch from 'primevue/toggleswitch';
-import Button from 'primevue/button';
+import ToggleSwitch from 'primevue/toggleswitch'
+import Button from 'primevue/button'
+import Dialog from 'primevue/dialog'
 
 const svg = ref(null)
 const showAnnotations = ref(true)
 const isCelcius = ref(true)
 const showBaseline = ref(true)
+const activeAnnotation = ref(null)
+const op = ref()
 const contextButtonLabel = computed(() => {
   return showAnnotations.value ? 'Hide Context' : 'Show Context'
 })
@@ -37,6 +45,52 @@ const contextButtonLabel = computed(() => {
 const filePath = computed(() => {
   return isCelcius.value ? '/data/global-temperature-anomaly-c.csv' : '/data/global-temperature-anomaly-c.csv'
 })
+
+// Annotation Details
+const annotationDetails = {
+  paris: {
+    title: 'Paris Agreement (2015)',
+    subtitle: 'A global turning point — and a warning',
+    description:
+      'In 2015, nearly every country on Earth agreed to limit global warming to well below 2°C, with an aspirational target of 1.5°C above pre-industrial levels, marking the first time the world formally acknowledged the scale of the climate crisis and committed—at least on paper—to act together. Despite this milestone, global temperatures have continued to rise, and the 1.5°C threshold is no longer a distant goal but an imminent boundary that scientists warn may be crossed within the next decade. The Paris Agreement remains a critical framework, but the data shows that ambition has yet to translate into sufficient action.',
+  },
+
+  rapid: {
+    title: 'Rapid Acceleration (Beginning Late 70s)',
+    subtitle: 'When warming begins to steepen',
+    description:
+      'Beginning in the late 1970s, global temperature records show a marked increase in the rate of warming, signaling a shift from gradual change to sustained acceleration. This period aligns with rapid industrial growth, rising fossil fuel use, and increasing greenhouse gas concentrations in the atmosphere. The steeper trajectory seen in the data underscores how human activity began to dominate natural variability, setting the stage for the warming trends that define the modern climate era.',
+  },
+
+  cleanAir: {
+    title: 'Clean Air Act (1970)',
+    subtitle: 'Clearer skies, unintended consequences',
+    description:
+      'The U.S. Clean Air Act of 1970 dramatically reduced air pollutants such as sulfur dioxide and particulate matter, improving public health and visibility across much of the country. While these regulations were a major environmental success, they also reduced aerosol pollution that had been reflecting sunlight and slightly masking global warming. As cleaner air spread, the underlying warming effect of greenhouse gases became more apparent in temperature records.',
+  },
+
+  kyotoProtocol: {
+    title: 'Kyoto Protocol (1997)',
+    subtitle: 'The first binding climate treaty',
+    description:
+      'Adopted in 1997, the Kyoto Protocol marked the first international agreement to set legally binding greenhouse gas reduction targets for developed nations. While historically significant, its impact was limited by the absence of major emitters and uneven enforcement. The protocol highlighted both the possibility and the difficulty of coordinated global climate action, revealing the gap between political commitment and the scale of emissions reductions required.',
+  },
+
+  ippc: {
+    title: 'IPCC Established (1988)',
+    subtitle: 'Science enters the global stage',
+    description:
+      'In 1988, the United Nations and the World Meteorological Organization established the Intergovernmental Panel on Climate Change to assess the growing body of climate science. The IPCC does not conduct research itself, but synthesizes thousands of studies to inform policymakers. Its assessment reports have become the authoritative scientific foundation for understanding climate change, its causes, and its projected impacts.',
+  },
+
+  anthro: {
+    title: 'Anthropogenic Warming Proposed (1896)',
+    subtitle: 'The idea predates the data',
+    description:
+      'In 1896, Swedish scientist Svante Arrhenius published the first quantitative calculations suggesting that carbon dioxide emissions from human activity could raise Earth’s global temperature. At the time, the idea was largely theoretical and far removed from observable climate impacts. More than a century later, Arrhenius’s early work stands as a remarkably prescient foundation for modern climate science, demonstrating that the core mechanism behind human-caused warming was understood long before its consequences became visible.',
+  }
+}
+
 
 const width = 800
 const height = 400
@@ -245,6 +299,10 @@ onMounted(async () => {
     .attr('stroke-width', '4px')
     .attr('paint-order', 'stroke fill')
     .attr('stroke-linejoin', 'round')
+    .style('cursor', 'pointer')
+    .on('click', (event) => {
+      activeAnnotation.value = 'paris'
+    })
 
   parisAnnotation
     .attr('transform', 'translate(0, 6)')
@@ -280,6 +338,10 @@ onMounted(async () => {
     .attr('stroke-width', '4px')
     .attr('paint-order', 'stroke fill')
     .attr('stroke-linejoin', 'round')
+    .style('cursor', 'pointer')
+    .on('click', (event) => {
+      activeAnnotation.value = 'rapid'
+    })
 
   rapidAnnotation
     .transition()
@@ -313,6 +375,10 @@ onMounted(async () => {
     .attr('stroke-width', '4px')
     .attr('paint-order', 'stroke fill')
     .attr('stroke-linejoin', 'round')
+    .style('cursor', 'pointer')
+    .on('click', (event) => {
+      activeAnnotation.value = 'cleanAir'
+    })
 
   cleanAirAnnotation
     .transition()
@@ -345,6 +411,10 @@ onMounted(async () => {
     .attr('stroke-width', '4px')
     .attr('paint-order', 'stroke fill')
     .attr('stroke-linejoin', 'round')
+    .style('cursor', 'pointer')
+    .on('click', (event) => {
+      activeAnnotation.value = 'kyotoProtocol'
+    })
 
   kyotoAnnotation
     .transition()
@@ -377,6 +447,10 @@ onMounted(async () => {
     .attr('stroke-width', '4px')
     .attr('paint-order', 'stroke fill')
     .attr('stroke-linejoin', 'round')
+    .style('cursor', 'pointer')
+    .on('click', (event) => {
+      activeAnnotation.value = 'paris'
+    })
 
   ipccAnnotation
     .transition()
@@ -389,7 +463,7 @@ onMounted(async () => {
     .attr('class', 'annotation anthro')
     .attr('opacity', 0)
 
-  ipccAnnotation.append('line')
+  anthroAnnotation.append('line')
     .attr('x1', anthroX)
     .attr('x2', anthroX)
     .attr('y1', 0)
@@ -398,7 +472,7 @@ onMounted(async () => {
     .attr('stroke-width', 1)
     .attr('stroke-dasharray', '3,3')
 
-  ipccAnnotation.append('text')
+  anthroAnnotation.append('text')
     .attr('x', anthroX - 63)
     .attr('y', 120)
     .text('Anthropogenic Warming')
@@ -409,8 +483,12 @@ onMounted(async () => {
     .attr('stroke-width', '4px')
     .attr('paint-order', 'stroke fill')
     .attr('stroke-linejoin', 'round')
+    .style('cursor', 'pointer')
+    .on('click', (event) => {
+      activeAnnotation.value = 'anthro'
+    })
 
-  ipccAnnotation
+  anthroAnnotation
     .transition()
     .delay(500)
     .duration(600)
@@ -495,5 +573,28 @@ h1 {
 
 p {
   font-family: 'Geist', sans-serif;
+}
+
+.annotation-details {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 260px;
+  background: white;
+  border-radius: 6px;
+  padding: 14px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+  font-family: sans-serif;
+}
+
+.annotation-details h4 {
+  margin: 0 0 6px;
+  font-size: 14px;
+}
+
+.annotation-details p {
+  font-size: 13px;
+  color: #555;
+  line-height: 1.4;
 }
 </style>

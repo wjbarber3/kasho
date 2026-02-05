@@ -1,9 +1,16 @@
-import Aura from '@primeuix/themes/aura';
+import Aura from '@primeuix/themes/aura'
+import tailwindcss from "@tailwindcss/vite"
 
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
-  modules: ['@nuxtjs/tailwindcss', '@nuxt/fonts', '@primevue/nuxt-module'],
+  css: ['./app/assets/css/main.css'],
+  vite: {
+    plugins: [
+      tailwindcss(),
+    ],
+  },
+  modules: ['@nuxt/fonts', '@primevue/nuxt-module'],
   fonts: {
     families: [
       // Optional: specify families and weights for better control

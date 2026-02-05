@@ -1,7 +1,7 @@
 <template>
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center gap-y-8">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center gap-y-4">
     <div class="flex justify-between flex-col items center w-full items-center gap-y-1 mb-8">
-      <h1 class="text-3xl font-bold">Warming is Not Linear</h1>
+      <h1 class="text-4xl font-bold">Warming is Not Linear</h1>
       <p>Global temperature anomaly relative to 1951-1980 average.</p>
     </div>
     <svg class="mx-auto" ref="svg" :width="width" :height="height"></svg>
@@ -10,6 +10,12 @@
         <span>Show Context</span>
         <ToggleSwitch v-model="showAnnotations" />
       </div>
+    </div>
+    <div>
+      <p class="italic text-xs">Data Sources: 
+        <a class="underline text-green text-primary" href="https://data.giss.nasa.gov/gistemp/" target="_blank">Nasa Gistemp</a>,
+        <a class="underline text-green text-primary" href="https://berkeleyearth.org/data/" target="_blank">Berkeley Earth</a>
+      </p>
     </div>
   </div>
 </template>
@@ -479,6 +485,10 @@ watch(showAnnotations, (visible) => {
 </script>
 
 <style>
+body {
+  font-family: 'Geist', sans-serif;
+}
+
 h1 {
   font-family: 'Rethink Sans', sans-serif;
 }

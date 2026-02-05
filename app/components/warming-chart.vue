@@ -2,25 +2,32 @@
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center gap-y-4">
     <div class="flex justify-between flex-col items center w-full items-center gap-y-1 mb-8">
       <h1 class="text-4xl font-bold">Warming is Not Linear</h1>
-      <p class="mb-2">
+      <p class="mb-2 italic">
         Global temperature anomaly relative to 1951-1980 average.
       </p>
 
-      <p class="italic text-sm flex items-center gap-x-2">
+      <Divider class="max-w-xl" />
+
+      <p class="text-sm flex items-center gap-x-2">
         <i class="pi pi-sparkles text-yellow-200"></i>
         <span>Hover across the chart to see the temperature anomaly for a given year</span>
       </p>
 
-      <p class="italic text-sm flex items-center gap-x-2">
+      <p class="text-sm flex items-center gap-x-2">
         <i class="pi pi-sparkles text-yellow-200"></i>
         <span>Click each context title to learn more about the given event</span>
+      </p>
+
+      <p class="text-sm flex items-center gap-x-2">
+        <i class="pi pi-sparkles text-yellow-200"></i>
+        <span>You can also hover a context event to highlight its line relevant to the chart</span>
       </p>
 
     </div>
     <svg class="mx-auto" ref="svg" :width="width" :height="height"></svg>
     <div class="flex item-center justify-center gap-x-4">
       <div class="flex items-center w-full gap-x-2 justify-center">
-        <span>Show Context</span>
+        <span>Show Annotations</span>
         <ToggleSwitch v-model="showAnnotations" />
       </div>
     </div>
@@ -44,16 +51,14 @@ import * as d3 from 'd3'
 import ToggleSwitch from 'primevue/toggleswitch'
 import Button from 'primevue/button'
 import Dialog from 'primevue/dialog'
+import Divider from 'primevue/divider'
 
 const svg = ref(null)
 const showAnnotations = ref(true)
 const isCelcius = ref(true)
 const showBaseline = ref(true)
 const activeAnnotation = ref(null)
-const op = ref()
-const contextButtonLabel = computed(() => {
-  return showAnnotations.value ? 'Hide Context' : 'Show Context'
-})
+
 
 const filePath = computed(() => {
   return isCelcius.value ? '/data/global-temperature-anomaly-c.csv' : '/data/global-temperature-anomaly-c.csv'
@@ -104,6 +109,58 @@ const annotationDetails = {
   }
 }
 
+// Annotation Config
+const annotationsConfig = [
+  {
+    key: 'anthro',
+    year: 1896,
+    label: 'Anthropogenic Warming',
+    y: 120,
+    dx: -63,
+    delay: 200,
+  },
+  {
+    key: 'cleanAir',
+    year: 1970,
+    label: 'Clean Air Act',
+    y: 100,
+    dx: -34,
+    delay: 350,
+  },
+  {
+    key: 'rapid',
+    year: 1980,
+    label: 'Rapid Acceleration',
+    y: 50,
+    dx: -40,
+    delay: 500,
+  },
+  {
+    key: 'ipcc',
+    year: 1988,
+    label: 'IPCC',
+    y: 120,
+    dx: -13,
+    delay: 650,
+  },
+  {
+    key: 'kyotoProtocol',
+    year: 1997,
+    label: 'Kyoto Protocol',
+    y: 80,
+    dx: -34,
+    delay: 800,
+  },
+  {
+    key: 'paris',
+    year: 2015,
+    label: 'Paris Agreement',
+    y: 20,
+    dx: -50,
+    delay: 950,
+  },
+]
+
 
 const width = 800
 const height = 400
@@ -138,6 +195,93 @@ onMounted(async () => {
   const kyotoX = x(1997)
   const ipccX = x(1988)
   const anthroX = x(1896)
+
+  function drawAnnotations({ g, x, innerHeight }) {
+    const group = g.append('g')
+      .attr('class', 'annotations')
+
+    annotationsConfig.forEach((a) => {
+      const xPos = x(a.year)
+
+      const annotation = group.append('g')
+        .attr('class', `annotation ${a.key}`)
+        .attr('opacity', 0)
+        .attr('transform', 'translate(0, 6)')
+
+      // vertical line
+      annotation.append('line')
+        .attr('x1', xPos)
+        .attr('x2', xPos)
+        .attr('y1', 0)
+        .attr('y2', innerHeight)
+        .attr('stroke', '#b0b0b0')
+        .attr('stroke-width', 1)
+        .attr('stroke-dasharray', '3,3')
+
+      annotation.append('text')
+  .attr('x', xPos + a.dx)
+  .attr('y', a.y)
+  .text(a.label)
+  .attr('fill', '#c9c9c9')
+  .attr('font-size', '13px')
+  .attr('font-family', 'sans-serif')
+  .attr('stroke', 'black')
+  .attr('stroke-width', '4px')
+  .attr('paint-order', 'stroke fill')
+  .attr('stroke-linejoin', 'round')
+  .style('cursor', 'pointer')
+
+  // 🔹 HOVER IN
+  .on('mouseenter', () => {
+    const d = getDataForYear(a.year)
+    if (!d) return
+
+    // highlight vertical line
+    annotation.select('line')
+      .transition()
+      .duration(200)
+      .attr('stroke', '#ED4E23')
+      .attr('stroke-width', 1.5)
+
+    // show dot
+    highlightDot
+      .attr('cx', x(d.year))
+      .attr('cy', y(d.anomaly))
+      .transition()
+      .duration(200)
+      .style('opacity', 1)
+  })
+
+  // 🔹 HOVER OUT
+  .on('mouseleave', () => {
+    annotation.select('line')
+      .transition()
+      .duration(200)
+      .attr('stroke', '#b0b0b0')
+      .attr('stroke-width', 1)
+
+    highlightDot
+      .transition()
+      .duration(200)
+      .style('opacity', 0)
+  })
+
+  // 🔹 CLICK
+  .on('click', () => {
+    activeAnnotation.value = a.key
+  })
+
+      // animation
+      annotation
+        .transition()
+        .delay(a.delay)
+        .duration(600)
+        .ease(d3.easeCubicOut)
+        .attr('opacity', 1)
+        .attr('transform', 'translate(0, 0)')
+      })
+    }
+
 
   // handle the 1950 - 1981 baseline
   const baselineMin = 0.0  // bottom of band
@@ -185,34 +329,47 @@ onMounted(async () => {
   .y1(d => y(d.anomaly))
   .curve(d3.curveLinear)
 
-    const focus = g.append('circle')
-  .attr('r', 4)
-  .attr('fill', 'black')
-  .attr('stroke', '#fff')
-  .attr('stroke-width', 1.5)
-  .style('opacity', 0)
+  const focus = g.append('circle')
+    .attr('r', 4)
+    .attr('fill', 'black')
+    .attr('stroke', '#fff')
+    .attr('stroke-width', 1.5)
+    .style('opacity', 0)
+
+  const highlightDot = g.append('circle')
+    .attr('r', 5)
+    .attr('fill', '#ED4E23')
+    .attr('stroke', '#fff')
+    .attr('stroke-width', 1.5)
+    .style('opacity', 0)
+    .style('pointer-events', 'none')
 
   const overlay = g.append('rect')
-  .attr('width', innerWidth)
-  .attr('height', innerHeight)
-  .attr('fill', 'transparent')
-  .style('pointer-events', 'all')
+    .attr('width', innerWidth)
+    .attr('height', innerHeight)
+    .attr('fill', 'transparent')
+    .style('pointer-events', 'all')
 
   // draw area
   g.append('path')
-  .datum(data)
-  .attr('fill', 'url(#anomaly-gradient)')
-  .attr('opacity', 0.35)
-  .attr('d', area)
-  .attr('pointer-events', 'none')
+    .datum(data)
+    .attr('fill', 'url(#anomaly-gradient)')
+    .attr('opacity', 0.35)
+    .attr('d', area)
+    .attr('pointer-events', 'none')
 
   g.select('path') // the area
-  .attr('opacity', 0)
-  .transition()
-  .duration(800)
-  .attr('opacity', 0.35)
+    .attr('opacity', 0)
+    .transition()
+    .duration(800)
+    .attr('opacity', 0.35)
 
   const bisectYear = d3.bisector(d => d.year).left
+
+  function getDataForYear(year) {
+    const index = bisectYear(data, year)
+    return data[index]
+  }
 
   overlay
   .on('mousemove', (event) => {
@@ -236,8 +393,15 @@ onMounted(async () => {
     // update tooltip
     tooltip
       .html(`
-        <strong>${d.year}</strong><br/>
-        ${d.anomaly.toFixed(2)}°C
+        <div class="flex flex-col gap-y-2">
+          <div class="flex items-center gap-x-2">
+            <i class="pi pi-circle-fill text-green-900"></i>
+            <p class="font-semibold text-[Geist]">Year: ${d.year}</p>
+          </div>
+          <div class="flex items-center gap-x-2">
+            <i class="pi pi-circle-fill text-red-900"></i>
+            <p class="font-semibold text-[Geist]">Anomaly: ${d.anomaly.toFixed(2)} °Celcius</p>
+          </div>
       `)
       .style('left', `${event.pageX + 10}px`)
       .style('top', `${event.pageY - 28}px`)
@@ -277,237 +441,16 @@ onMounted(async () => {
   g.append('text')
   .attr('x', 10)
   .attr('y', bandTop + 15)
-  .text('1951–1980 Average -->')
+  .text('1951–1980 Baseline -->')
   .attr('fill', '#34D399')
   .attr('font-size', '12px')
   .attr('font-family', 'Geist')
 
-  // ANNOTATIONS
-
-  const annotationsGroup = g.append('g')
-  .attr('class', 'annotations')
-
-  // Paris
-  const parisAnnotation = annotationsGroup.append('g')
-  .attr('class', 'annotation paris')
-  .attr('opacity', 0)
-
-  parisAnnotation.append('line')
-    .attr('x1', parisX)
-    .attr('x2', parisX)
-    .attr('y1', 0)
-    .attr('y2', innerHeight)
-    .attr('stroke', '#b0b0b0')
-    .attr('stroke-width', 1)
-    .attr('stroke-dasharray', '3,3')
-
-  parisAnnotation.append('text')
-    .attr('x', parisX - 50)
-    .attr('y', 20)
-    .text('Paris Agreement')
-    .attr('fill', '#c9c9c9')
-    .attr('font-size', '12px')
-    .attr('font-family', 'sans-serif')
-    .attr('stroke', 'black')
-    .attr('stroke-width', '4px')
-    .attr('paint-order', 'stroke fill')
-    .attr('stroke-linejoin', 'round')
-    .style('cursor', 'pointer')
-    .on('click', (event) => {
-      activeAnnotation.value = 'paris'
-    })
-
-  parisAnnotation
-    .attr('transform', 'translate(0, 6)')
-    .transition()
-    .delay(200)
-    .duration(600)
-    .ease(d3.easeCubicOut)
-    .attr('opacity', 1)
-    .attr('transform', 'translate(0, 0)')
-  
-  // Rapid
-  const rapidAnnotation = annotationsGroup.append('g')
-    .attr('class', 'annotation rapid')
-    .attr('opacity', 0)
-
-  rapidAnnotation.append('line')
-    .attr('x1', rapidX)
-    .attr('x2', rapidX)
-    .attr('y1', 0)
-    .attr('y2', innerHeight)
-    .attr('stroke', '#b0b0b0')
-    .attr('stroke-width', 1)
-    .attr('stroke-dasharray', '3,3')
-
-  rapidAnnotation.append('text')
-    .attr('x', rapidX - 40)
-    .attr('y', 50)
-    .text('Rapid Acceleration')
-    .attr('fill', '#c9c9c9')
-    .attr('font-size', '12px')
-    .attr('font-family', 'sans-serif')
-    .attr('stroke', 'black')
-    .attr('stroke-width', '4px')
-    .attr('paint-order', 'stroke fill')
-    .attr('stroke-linejoin', 'round')
-    .style('cursor', 'pointer')
-    .on('click', (event) => {
-      activeAnnotation.value = 'rapid'
-    })
-
-  rapidAnnotation
-    .transition()
-    .delay(350) // nice stagger
-    .duration(600)
-    .ease(d3.easeCubicOut)
-    .attr('opacity', 1)
-  
-  // Clean Air
-  const cleanAirAnnotation = annotationsGroup.append('g')
-    .attr('class', 'annotation clean-air')
-    .attr('opacity', 0)
-
-  cleanAirAnnotation.append('line')
-    .attr('x1', cleanAirX)
-    .attr('x2', cleanAirX)
-    .attr('y1', 0)
-    .attr('y2', innerHeight)
-    .attr('stroke', '#b0b0b0')
-    .attr('stroke-width', 1)
-    .attr('stroke-dasharray', '3,3')
-
-  cleanAirAnnotation.append('text')
-    .attr('x', cleanAirX - 34)
-    .attr('y', 100)
-    .text('Clean Air Act')
-    .attr('fill', '#c9c9c9')
-    .attr('font-size', '12px')
-    .attr('font-family', 'sans-serif')
-    .attr('stroke', 'black')
-    .attr('stroke-width', '4px')
-    .attr('paint-order', 'stroke fill')
-    .attr('stroke-linejoin', 'round')
-    .style('cursor', 'pointer')
-    .on('click', (event) => {
-      activeAnnotation.value = 'cleanAir'
-    })
-
-  cleanAirAnnotation
-    .transition()
-    .delay(500)
-    .duration(600)
-    .ease(d3.easeCubicOut)
-    .attr('opacity', 1)
-
-  const kyotoAnnotation = annotationsGroup.append('g')
-    .attr('class', 'annotation kyoto')
-    .attr('opacity', 0)
-
-  kyotoAnnotation.append('line')
-    .attr('x1', kyotoX)
-    .attr('x2', kyotoX)
-    .attr('y1', 0)
-    .attr('y2', innerHeight)
-    .attr('stroke', '#b0b0b0')
-    .attr('stroke-width', 1)
-    .attr('stroke-dasharray', '3,3')
-
-  kyotoAnnotation.append('text')
-    .attr('x', kyotoX - 34)
-    .attr('y', 80)
-    .text('Kyoto Protocol')
-    .attr('fill', '#c9c9c9')
-    .attr('font-size', '12px')
-    .attr('font-family', 'sans-serif')
-    .attr('stroke', 'black')
-    .attr('stroke-width', '4px')
-    .attr('paint-order', 'stroke fill')
-    .attr('stroke-linejoin', 'round')
-    .style('cursor', 'pointer')
-    .on('click', (event) => {
-      activeAnnotation.value = 'kyotoProtocol'
-    })
-
-  kyotoAnnotation
-    .transition()
-    .delay(500)
-    .duration(600)
-    .ease(d3.easeCubicOut)
-    .attr('opacity', 1)
-
-  const ipccAnnotation = annotationsGroup.append('g')
-    .attr('class', 'annotation ipcc')
-    .attr('opacity', 0)
-
-  ipccAnnotation.append('line')
-    .attr('x1', ipccX)
-    .attr('x2', ipccX)
-    .attr('y1', 0)
-    .attr('y2', innerHeight)
-    .attr('stroke', '#b0b0b0')
-    .attr('stroke-width', 1)
-    .attr('stroke-dasharray', '3,3')
-
-  ipccAnnotation.append('text')
-    .attr('x', ipccX - 13)
-    .attr('y', 120)
-    .text('IPCC')
-    .attr('fill', '#c9c9c9')
-    .attr('font-size', '12px')
-    .attr('font-family', 'sans-serif')
-    .attr('stroke', 'black')
-    .attr('stroke-width', '4px')
-    .attr('paint-order', 'stroke fill')
-    .attr('stroke-linejoin', 'round')
-    .style('cursor', 'pointer')
-    .on('click', (event) => {
-      activeAnnotation.value = 'ipcc'
-    })
-
-  ipccAnnotation
-    .transition()
-    .delay(500)
-    .duration(600)
-    .ease(d3.easeCubicOut)
-    .attr('opacity', 1)
-
-  const anthroAnnotation = annotationsGroup.append('g')
-    .attr('class', 'annotation anthro')
-    .attr('opacity', 0)
-
-  anthroAnnotation.append('line')
-    .attr('x1', anthroX)
-    .attr('x2', anthroX)
-    .attr('y1', 0)
-    .attr('y2', innerHeight)
-    .attr('stroke', '#b0b0b0')
-    .attr('stroke-width', 1)
-    .attr('stroke-dasharray', '3,3')
-
-  anthroAnnotation.append('text')
-    .attr('x', anthroX - 63)
-    .attr('y', 120)
-    .text('Anthropogenic Warming')
-    .attr('fill', '#c9c9c9')
-    .attr('font-size', '12px')
-    .attr('font-family', 'sans-serif')
-    .attr('stroke', 'black')
-    .attr('stroke-width', '4px')
-    .attr('paint-order', 'stroke fill')
-    .attr('stroke-linejoin', 'round')
-    .style('cursor', 'pointer')
-    .on('click', (event) => {
-      activeAnnotation.value = 'anthro'
-    })
-
-  anthroAnnotation
-    .transition()
-    .delay(500)
-    .duration(600)
-    .ease(d3.easeCubicOut)
-    .attr('opacity', 1)
-
+  drawAnnotations({
+    g,
+    x,
+    innerHeight,
+  })
 
   // axes (still here for now)
   g.append('g')
@@ -530,7 +473,7 @@ onMounted(async () => {
     .attr('text-anchor', 'middle')
     .attr('fill', '#666')
     .attr('font-size', '12px')
-    .text('Degrees Celsius')
+    .text('Anomaly Degrees Celsius')
     .attr('letter-spacing', '.1em')
     .attr('font-weight', 400)
     .attr('font-family', 'Geist')
@@ -552,16 +495,19 @@ onMounted(async () => {
     
 
   const tooltip = d3.select('body')
-  .append('div')
-  .style('position', 'absolute')
-  .style('pointer-events', 'none')
-  .style('background', '#fff')
-  .style('border', '1px solid #ddd')
-  .style('padding', '6px 8px')
-  .style('font-size', '12px')
-  .style('color', '#333')
-  .style('opacity', 0)
-  })
+    .append('div')
+    .style('position', 'absolute')
+    .style('pointer-events', 'none')
+    .style('background', '#fff')
+    .style('border', '1px solid #ddd')
+    .style('border-radius', '5px')
+    .style('padding', '10px')
+    .style('font-size', '12px')
+    .style('color', '#333')
+    .style('opacity', 0)
+})
+
+
 
 watch(showAnnotations, (visible) => {
   d3.select('.annotations')
@@ -588,26 +534,4 @@ p {
   font-family: 'Geist', sans-serif;
 }
 
-.annotation-details {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  width: 260px;
-  background: white;
-  border-radius: 6px;
-  padding: 14px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.12);
-  font-family: sans-serif;
-}
-
-.annotation-details h4 {
-  margin: 0 0 6px;
-  font-size: 14px;
-}
-
-.annotation-details p {
-  font-size: 13px;
-  color: #555;
-  line-height: 1.4;
-}
 </style>

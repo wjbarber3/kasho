@@ -395,12 +395,18 @@ onMounted(async () => {
       .html(`
         <div class="flex flex-col gap-y-2">
           <div class="flex items-center gap-x-2">
-            <i class="pi pi-circle-fill text-green-900"></i>
-            <p class="font-semibold text-[Geist]">Year: ${d.year}</p>
+            <i class="pi pi-circle-fill text-green-900" style="font-size: .7rem"></i>
+            <p class="font-semibold text-[Geist]">
+              <span class="underline">Year:</span>
+              ${d.year}
+            </p>
           </div>
           <div class="flex items-center gap-x-2">
-            <i class="pi pi-circle-fill text-red-900"></i>
-            <p class="font-semibold text-[Geist]">Anomaly: ${d.anomaly.toFixed(2)} °Celcius</p>
+            <i class="pi pi-circle-fill text-red-900" style="font-size: .7rem"></i>
+            <p class="font-semibold text-[Geist]">
+              <span class="underline">Anomaly:</span>
+              ${d.anomaly.toFixed(2)}° Celcius
+            </p>
           </div>
       `)
       .style('left', `${event.pageX + 10}px`)
@@ -442,7 +448,7 @@ onMounted(async () => {
   .attr('x', 10)
   .attr('y', bandTop + 15)
   .text('1951–1980 Baseline -->')
-  .attr('fill', '#34D399')
+  .attr('fill', '#fff')
   .attr('font-size', '12px')
   .attr('font-family', 'Geist')
 
@@ -521,7 +527,7 @@ watch(showAnnotations, (visible) => {
 
 </script>
 
-<style>
+<style scoped>
 body {
   font-family: 'Geist', sans-serif;
 }

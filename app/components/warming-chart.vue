@@ -6,11 +6,9 @@
     </div>
     <svg class="mx-auto" ref="svg" :width="width" :height="height"></svg>
     <div class="flex item-center justify-center gap-x-4">
-      <Button size="small" severity="secondary" @click="showAnnotations = !showAnnotations" :label="contextButtonLabel" />
       <div class="flex items-center w-full gap-x-2 justify-center">
-        <span>Celcius</span>
-        <ToggleSwitch v-model="isCelcius" />
-        <span>Farenheit</span>
+        <span>Show Context</span>
+        <ToggleSwitch v-model="showAnnotations" />
       </div>
     </div>
   </div>
@@ -36,10 +34,10 @@ const filePath = computed(() => {
 
 const width = 800
 const height = 400
-const margin = { top: 20, right: 20, bottom: 30, left: 40 }
+const margin = { top: 20, right: 20, bottom: 50, left: 60 }
 
 onMounted(async () => {
-  const data = await d3.csv(filePath.value, d => ({
+  const data = await d3.csv('/data/global-temperature-anomaly-c.csv', d => ({
     year: +d.year,
     anomaly: +d.anomaly
   }))
@@ -66,6 +64,7 @@ onMounted(async () => {
   const rapidX = x(1980)
   const kyotoX = x(1997)
   const ipccX = x(1988)
+  const anthroX = x(1896)
 
   // handle the 1950 - 1981 baseline
   const baselineMin = 0.0  // bottom of band
@@ -194,6 +193,7 @@ onMounted(async () => {
   .attr('height', bandBottom - bandTop)
   .attr('fill', '#c9c9c9')    // light neutral color
   .attr('opacity', 0.3)
+  .style('pointer-events', 'none')
 
   g.select('.baseline-band')
   .attr('height', 0)
@@ -316,7 +316,7 @@ onMounted(async () => {
     .attr('opacity', 1)
 
   const kyotoAnnotation = annotationsGroup.append('g')
-    .attr('class', 'annotation clean-air')
+    .attr('class', 'annotation kyoto')
     .attr('opacity', 0)
 
   kyotoAnnotation.append('line')
@@ -348,7 +348,7 @@ onMounted(async () => {
     .attr('opacity', 1)
 
   const ipccAnnotation = annotationsGroup.append('g')
-    .attr('class', 'annotation clean-air')
+    .attr('class', 'annotation ipcc')
     .attr('opacity', 0)
 
   ipccAnnotation.append('line')
@@ -379,18 +379,79 @@ onMounted(async () => {
     .ease(d3.easeCubicOut)
     .attr('opacity', 1)
 
+  const anthroAnnotation = annotationsGroup.append('g')
+    .attr('class', 'annotation anthro')
+    .attr('opacity', 0)
+
+  ipccAnnotation.append('line')
+    .attr('x1', anthroX)
+    .attr('x2', anthroX)
+    .attr('y1', 0)
+    .attr('y2', innerHeight)
+    .attr('stroke', '#b0b0b0')
+    .attr('stroke-width', 1)
+    .attr('stroke-dasharray', '3,3')
+
+  ipccAnnotation.append('text')
+    .attr('x', anthroX - 63)
+    .attr('y', 120)
+    .text('Anthropogenic Warming')
+    .attr('fill', '#c9c9c9')
+    .attr('font-size', '12px')
+    .attr('font-family', 'sans-serif')
+    .attr('stroke', 'black')
+    .attr('stroke-width', '4px')
+    .attr('paint-order', 'stroke fill')
+    .attr('stroke-linejoin', 'round')
+
+  ipccAnnotation
+    .transition()
+    .delay(500)
+    .duration(600)
+    .ease(d3.easeCubicOut)
+    .attr('opacity', 1)
+
 
   // axes (still here for now)
   g.append('g')
     .attr('transform', `translate(0, ${innerHeight})`)
     .call(d3.axisBottom(x).ticks(12).tickFormat(d3.format('d')))
     .style('font-size', '10px')
-    .style('color', '#c9c9c9')
+    .style('color', '#666')
 
   g.append('g')
     .call(d3.axisLeft(y))
     .style('font-size', '10px')
-    .style('color', '#c9c9c9')
+    .style('color', '#666')
+
+  const yAxisGroup = g.append('g')
+  const yLabel = yAxisGroup.append('text')
+    .attr('class', 'y-axis-label')
+    .attr('transform', 'rotate(-90)')
+    .attr('x', -innerHeight / 2)
+    .attr('y', -margin.left + 15)
+    .attr('text-anchor', 'middle')
+    .attr('fill', '#666')
+    .attr('font-size', '12px')
+    .text('Degrees Celsius')
+    .attr('letter-spacing', '.1em')
+    .attr('font-weight', 400)
+    .attr('font-family', 'Geist')
+
+  const xAxisGroup = g.append('g')
+  .attr('transform', `translate(0, ${innerHeight})`)
+
+  const xLabel = xAxisGroup.append('text')
+  .attr('class', 'x-axis-label')
+  .attr('x', innerWidth / 2)
+  .attr('y', margin.bottom - 10)
+  .attr('text-anchor', 'middle')
+  .attr('fill', '#666')
+  .attr('font-size', '12px')
+  .text('Year')
+  .attr('letter-spacing', '.1em')
+  .attr('font-weight', 400)
+  .attr('font-family', 'Geist')
     
 
   const tooltip = d3.select('body')

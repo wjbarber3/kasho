@@ -2,7 +2,20 @@
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center gap-y-4">
     <div class="flex justify-between flex-col items center w-full items-center gap-y-1 mb-8">
       <h1 class="text-4xl font-bold">Warming is Not Linear</h1>
-      <p>Global temperature anomaly relative to 1951-1980 average.</p>
+      <p class="mb-2">
+        Global temperature anomaly relative to 1951-1980 average.
+      </p>
+
+      <p class="italic text-sm flex items-center gap-x-2">
+        <i class="pi pi-sparkles text-yellow-200"></i>
+        <span>Hover across the chart to see the temperature anomaly for a given year</span>
+      </p>
+
+      <p class="italic text-sm flex items-center gap-x-2">
+        <i class="pi pi-sparkles text-yellow-200"></i>
+        <span>Click each context title to learn more about the given event</span>
+      </p>
+
     </div>
     <svg class="mx-auto" ref="svg" :width="width" :height="height"></svg>
     <div class="flex item-center justify-center gap-x-4">
@@ -11,16 +24,16 @@
         <ToggleSwitch v-model="showAnnotations" />
       </div>
     </div>
-    <div>
-      <p class="italic text-xs">Data Sources: 
-        <a class="underline text-green text-customPrimary" href="https://data.giss.nasa.gov/gistemp/" target="_blank">Nasa Gistemp</a>,
-        <a class="underline text-green text-primary" href="https://berkeleyearth.org/data/" target="_blank">Berkeley Earth</a>
-      </p>
+    <div class="flex items-center justify-center w-full gap-x-2 text-xs italic">
+      <p>Data Sources:</p>
+      <a class="underline text-primary" href="https://data.giss.nasa.gov/gistemp/" target="_blank">Nasa Gistemp</a>
+      <span>|</span>
+      <a class="underline text-primary" href="https://berkeleyearth.org/data/" target="_blank">Berkeley Earth</a>
     </div>
 
     <Dialog v-if="activeAnnotation" v-model:visible="activeAnnotation" modal :header="annotationDetails[activeAnnotation].title" :style="{ width: '25rem' }">
-      <h3 class="mb-4 text-lg italic font-[Rethink_Sans]">{{ annotationDetails[activeAnnotation].subtitle }}</h3>
-      <p class="text-sm">{{ annotationDetails[activeAnnotation].description }}</p>
+      <h3 class="mb-4 text-md italic font-[Rethink_Sans] text-primary">{{ annotationDetails[activeAnnotation].subtitle }}</h3>
+      <p class="text-xs">{{ annotationDetails[activeAnnotation].description }}</p>
     </Dialog>
   </div>
 </template>
@@ -76,7 +89,7 @@ const annotationDetails = {
       'Adopted in 1997, the Kyoto Protocol marked the first international agreement to set legally binding greenhouse gas reduction targets for developed nations. While historically significant, its impact was limited by the absence of major emitters and uneven enforcement. The protocol highlighted both the possibility and the difficulty of coordinated global climate action, revealing the gap between political commitment and the scale of emissions reductions required.',
   },
 
-  ippc: {
+  ipcc: {
     title: 'IPCC Established (1988)',
     subtitle: 'Science enters the global stage',
     description:
@@ -265,7 +278,7 @@ onMounted(async () => {
   .attr('x', 10)
   .attr('y', bandTop + 15)
   .text('1951–1980 Average -->')
-  .attr('fill', 'black')
+  .attr('fill', '#34D399')
   .attr('font-size', '12px')
   .attr('font-family', 'Geist')
 
@@ -449,7 +462,7 @@ onMounted(async () => {
     .attr('stroke-linejoin', 'round')
     .style('cursor', 'pointer')
     .on('click', (event) => {
-      activeAnnotation.value = 'paris'
+      activeAnnotation.value = 'ipcc'
     })
 
   ipccAnnotation

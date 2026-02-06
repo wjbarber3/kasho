@@ -1,7 +1,7 @@
 <template>
-  <the-header />
-  <div class="p-8">
-    <warming-chart />
+  <div class="bg-slate-100">
+    <the-header />
+    <NuxtPage />
   </div>
 </template>
 

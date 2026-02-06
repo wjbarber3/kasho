@@ -24,7 +24,9 @@
       </p>
 
     </div>
+
     <svg class="mx-auto" ref="svg" :width="width" :height="height"></svg>
+    
     <div class="flex item-center justify-center gap-x-4">
       <div class="flex items-center w-full gap-x-2 justify-center">
         <span>Show Annotations</span>
@@ -219,17 +221,17 @@ onMounted(async () => {
         .attr('stroke-dasharray', '3,3')
 
       annotation.append('text')
-  .attr('x', xPos + a.dx)
-  .attr('y', a.y)
-  .text(a.label)
-  .attr('fill', '#c9c9c9')
-  .attr('font-size', '13px')
-  .attr('font-family', 'sans-serif')
-  .attr('stroke', 'black')
-  .attr('stroke-width', '4px')
-  .attr('paint-order', 'stroke fill')
-  .attr('stroke-linejoin', 'round')
-  .style('cursor', 'pointer')
+        .attr('x', xPos + a.dx)
+        .attr('y', a.y)
+        .text(a.label)
+        .attr('fill', '#c9c9c9')
+        .attr('font-size', '13px')
+        .attr('font-family', 'sans-serif')
+        .attr('stroke', '#1B1917')
+        .attr('stroke-width', '4px')
+        .attr('paint-order', 'stroke fill')
+        .attr('stroke-linejoin', 'round')
+        .style('cursor', 'pointer')
 
   // 🔹 HOVER IN
   .on('mouseenter', () => {

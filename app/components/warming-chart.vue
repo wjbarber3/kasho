@@ -1,5 +1,5 @@
 <template>
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center gap-y-4">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center gap-y-4 text-slate-100">
     <div class="flex justify-between flex-col items center w-full items-center gap-y-1 mb-8">
       <h1 class="text-4xl font-bold">Warming is Not Linear</h1>
       <p class="mb-2 italic">

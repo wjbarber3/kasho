@@ -1,6 +1,6 @@
 <template>
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center gap-y-4">
-    <div class="flex justify-between flex-col items center w-full items-center gap-y-1 mb-8 text-slate-800">
+    <div class="flex justify-between flex-col items center w-full items-center gap-y-1 text-slate-800">
       <h1 class="text-4xl font-bold">Insurance Policy Timeline</h1>
       <p class="mb-2 italic">
         Coverage terms and change endorsements over time
@@ -33,7 +33,7 @@
 
     <svg class="mx-auto" ref="svg" :width="width" :height="height"></svg>
 
-    <!-- <div class="flex gap-x-4 mt-4 flex-wrap justify-center">
+    <div class="flex gap-x-8 mt-4 flex-wrap justify-center text-xs">
       <div
         v-for="term in policyTimeline.terms"
         :key="term.id"
@@ -55,12 +55,12 @@
         />
         <label
           :for="term.id"
-          class="text-sm cursor-pointer"
+          class="text-xs cursor-pointer font-bold text-slate-600"
         >
           {{ term.label }}
         </label>
       </div>
-    </div> -->
+    </div>
 
 
   </div>
@@ -120,16 +120,16 @@ const policyTimeline = {
       termId: 'term-1',
       start: '2024-04-20',
       end: '2025-02-01',
+      oos: true,
       type: 'Change',
       description: 'Increased liability limit',
     },
     {
       id: 'endorsement-2',
       termId: 'term-1',
-      start: '2024-06-20',
+      start: '2024-04-01',
       end: '2025-02-01',
       type: 'Change',
-      oos: true,
       description: 'Corrected rating basis',
     },
     {
@@ -179,31 +179,31 @@ const visibleTerms = ref(
   Lane assignment logic (per term)
 ----------------------------------- */
 
-function assignLanes(endorsements) {
-  const sorted = endorsements
-    .slice()
-    .sort((a, b) => new Date(a.start) - new Date(b.start))
+// function assignLanes(endorsements) {
+//   const sorted = endorsements
+//     .slice()
+//     .sort((a, b) => new Date(a.start) - new Date(b.start))
 
-  const lanes = []
+//   const lanes = []
 
-  sorted.forEach(e => {
-    const start = new Date(e.start)
+//   sorted.forEach(e => {
+//     const start = new Date(e.start)
 
-    let laneIndex = lanes.findIndex(lane =>
-      new Date(lane[lane.length - 1].end) <= start
-    )
+//     let laneIndex = lanes.findIndex(lane =>
+//       new Date(lane[lane.length - 1].end) <= start
+//     )
 
-    if (laneIndex === -1) {
-      laneIndex = lanes.length
-      lanes.push([])
-    }
+//     if (laneIndex === -1) {
+//       laneIndex = lanes.length
+//       lanes.push([])
+//     }
 
-    lanes[laneIndex].push(e)
-    e._lane = laneIndex
-  })
+//     lanes[laneIndex].push(e)
+//     e._lane = laneIndex
+//   })
 
-  return lanes
-}
+//   return lanes
+// }
 
 /* -----------------------------------
   D3 setup
@@ -412,27 +412,32 @@ onMounted(() => {
   )
 
   endorsementsByTerm.forEach((endorsements, termId) => {
-    assignLanes(endorsements)
 
     endorsementLayer
-      .selectAll(`.endorsement-${termId}`)
-      .data(endorsements)
-      .enter()
-      .append('rect')
-      .attr('class', 'endorsement-bar')
-      .attr('data-term-id', d => d.termId)
-      .attr('x', d => x(new Date(d.start)))
-      .attr('y', d => {
-        const baseY = y(termId) + endorsementTopOffset
-        return baseY + d._lane * (endorsementLaneHeight + endorsementLaneGap)
-      })
-      .attr('width', d =>
-        x(new Date(d.end)) - x(new Date(d.start))
+    .selectAll(`.endorsement-${termId}`)
+    .data(endorsements)
+    .enter()
+    .append('rect')
+    .attr('class', 'endorsement-bar')
+    .attr('data-term-id', d => d.termId)
+    .attr('x', d => x(new Date(d.start)))
+    .attr('y', (d, i) => {
+      const termY = y(termId)          // ✅ THIS fixes "termY undefined"
+      return (
+        termY +
+        endorsementTopOffset +
+        i * (endorsementLaneHeight + endorsementLaneGap)
       )
-      .attr('height', endorsementLaneHeight)
-      .attr('rx', 3)
-      .attr('fill', d => color(d.termId))
-      .attr('opacity', 0.35)
+    })
+    .attr('width', d =>
+      x(new Date(d.end)) - x(new Date(d.start))
+    )
+    .attr('height', endorsementLaneHeight)
+    .attr('rx', 3)
+    .attr('fill', d => {
+      return d.oos ? '#FEA4AF' : color(d.termId)
+    })
+    .attr('opacity', 0.35)
 
     endorsementLayer
       .selectAll('.endorsement-label')
@@ -441,23 +446,30 @@ onMounted(() => {
       .append('text')
       .attr('class', 'term-label')
       .attr('x', d => x(new Date(d.start)) + 6) // small left padding
-      .attr('y', d => {
-        const baseY = y(termId) + endorsementTopOffset + 10
-        return baseY + d._lane * (endorsementLaneHeight + endorsementLaneGap)
+      .attr('y', (d, i) => {
+        const termY = y(termId)
+        return (
+          termY +
+          endorsementTopOffset +
+          i * (endorsementLaneHeight + endorsementLaneGap) +
+          endorsementLaneHeight / 1.8
+        )
       })
       .attr('dominant-baseline', 'middle')
       .attr('fill', (d, i) => {
-        console.log(d)
-        return color(d.termId)
+        return d.oos ? '#FB7185' : color(d.termId)
       })
       .attr('fill-opacity', '1')
       .attr('font-size', '11px')
       .attr('font-weight', 700)
       .attr('font-family', 'Geist, sans-serif')
-      .text(`1.2`)
       .text((d, i) => {
         const term = d.termId.replace('term-', '')
-        return `${term}.${i + 1}: ${d.type}`
+        let baseText = `${term}.${i + 1}: ${d.type}`
+        if (d.oos) {
+          baseText += ': Out of Sequence'
+        }
+        return baseText
       })
       .style('pointer-events', 'none')
 

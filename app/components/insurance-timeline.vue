@@ -8,6 +8,12 @@
 
       <Divider type="dashed" class="max-w-xl text-slate-200 bg-slate-200" />
 
+      <div class="flex items-center justify-center gap-x-3 text-sm font-bold text-slate-400">
+        <i class="pi pi-moon" style="font-size: 1rem" />
+        <p>=</p>
+        <p>Twilight Period</p>
+      </div>
+
       <!-- <p class="text-sm flex items-center gap-x-2">
         <i class="pi pi-sparkles text-blue-400"></i>
         <span>Hover across the chart to see the temperature anomaly for a given year</span>
@@ -27,12 +33,42 @@
 
     <svg class="mx-auto" ref="svg" :width="width" :height="height"></svg>
 
+    <!-- <div class="flex gap-x-4 mt-4 flex-wrap justify-center">
+      <div
+        v-for="term in policyTimeline.terms"
+        :key="term.id"
+        class="flex items-center gap-x-2"
+      >
+        <Checkbox
+          :binary="true"
+          :modelValue="visibleTerms.has(term.id)"
+          @update:modelValue="() => toggleTerm(term.id)"
+          :inputId="term.id"
+          :pt="{
+            root: {
+              style: {
+                '--term-color': termColorMap[term.id],
+              }
+            }
+          }"
+          class="term-checkbox"
+        />
+        <label
+          :for="term.id"
+          class="text-sm cursor-pointer"
+        >
+          {{ term.label }}
+        </label>
+      </div>
+    </div> -->
+
+
   </div>
 </template>
 
 <script setup>
 import * as d3 from 'd3'
-import { ref, onMounted } from 'vue'
+import Checkbox from 'primevue/checkbox'
 
 /* -----------------------------------
   SVG refs + dimensions
@@ -57,22 +93,22 @@ const policyTimeline = {
     {
       id: 'term-1',
       label: 'Term 1',
-      start: '2022-01-01',
-      end: '2023-01-01',
+      start: '2024-02-01',
+      end: '2025-02-01',
       status: 'expired',
     },
     {
       id: 'term-2',
       label: 'Term 2',
-      start: '2023-01-01',
-      end: '2024-01-01',
+      start: '2025-02-01',
+      end: '2026-02-01',
       status: 'expired',
     },
     {
       id: 'term-3',
       label: 'Term 3',
-      start: '2024-01-01',
-      end: '2025-01-01',
+      start: '2026-02-01',
+      end: '2027-02-01',
       status: 'active',
     },
   ],
@@ -82,25 +118,26 @@ const policyTimeline = {
     {
       id: 'endorsement-1',
       termId: 'term-1',
-      start: '2022-03-01',
-      end: '2022-09-01',
-      type: 'Coverage Change',
+      start: '2024-04-20',
+      end: '2025-02-01',
+      type: 'Change',
       description: 'Increased liability limit',
     },
     {
       id: 'endorsement-2',
       termId: 'term-1',
-      start: '2022-06-15',
-      end: '2022-12-01',
-      type: 'Backdated Adjustment',
+      start: '2024-06-20',
+      end: '2025-02-01',
+      type: 'Change',
+      oos: true,
       description: 'Corrected rating basis',
     },
     {
       id: 'endorsement-3',
       termId: 'term-1',
-      start: '2022-10-01',
-      end: '2023-01-01',
-      type: 'Deductible Change',
+      start: '2024-06-29',
+      end: '2025-02-01',
+      type: 'Change',
       description: 'Higher deductible applied',
     },
 
@@ -108,39 +145,35 @@ const policyTimeline = {
     {
       id: 'endorsement-4',
       termId: 'term-2',
-      start: '2023-02-01',
-      end: '2023-08-01',
-      type: 'Coverage Expansion',
+      start: '2025-02-01',
+      end: '2026-02-01',
+      type: 'Renewal',
       description: 'Added additional insured',
-    },
-    {
-      id: 'endorsement-5',
-      termId: 'term-2',
-      start: '2023-07-01',
-      end: '2024-01-01',
-      type: 'Limit Adjustment',
-      description: 'Reduced liability limits',
     },
 
     // Term 3
     {
       id: 'endorsement-6',
       termId: 'term-3',
-      start: '2024-01-01',
-      end: '2024-06-01',
-      type: 'Renewal Re-rating',
+      start: '2026-02-01',
+      end: '2027-02-01',
+      type: 'Renewal',
       description: 'Premium adjusted at renewal',
     },
     {
       id: 'endorsement-7',
       termId: 'term-3',
-      start: '2024-05-01',
-      end: '2025-01-01',
-      type: 'Coverage Change',
+      start: '2026-08-01',
+      end: '2027-02-01',
+      type: 'Change',
       description: 'Expanded property coverage',
     },
   ],
 }
+
+const visibleTerms = ref(
+  new Set(policyTimeline.terms.map(t => t.id))
+)
 
 /* -----------------------------------
   Lane assignment logic (per term)
@@ -182,7 +215,29 @@ const termColors = [
   '#C5B5FD',
 ]
 
+const termColorPalette = [
+  '#94C5FD',
+  '#2DD4BF',
+  '#C5B5FD',
+]
+
+const termIndexMap = {}
+policyTimeline.terms.forEach((term, i) => {
+  termIndexMap[term.id] = i + 1
+})
+
+const termColorMap = computed(() => {
+  const map = {}
+  policyTimeline.terms.forEach((term, index) => {
+    map[term.id] = termColorPalette[index % termColorPalette.length]
+  })
+  return map
+})
+
 onMounted(() => {
+  const color = (termId) => termColorMap.value[termId]
+  const today = new Date()
+
   const tooltip = d3.select('body')
     .append('div')
     .attr('class', 'term-tooltip')
@@ -227,7 +282,7 @@ onMounted(() => {
   ------------------------------- */
 
   const termBarHeight = y.bandwidth() * 0.45
-  const endorsementLaneHeight = 10
+  const endorsementLaneHeight = 18
   const endorsementLaneGap = 4
   const endorsementTopOffset = termBarHeight + 4
 
@@ -237,6 +292,7 @@ onMounted(() => {
 
   const gridLayer = g.append('g')
   const termLayer = g.append('g')
+  const annotationLayer = g.append('g')
   const twilightLayer = g.append('g')
   const endorsementLayer = g.append('g')
 
@@ -252,26 +308,11 @@ onMounted(() => {
         .tickFormat(d3.timeFormat('%b %Y'))
     )
     .style('font-size', '10px')
-    .style('color', '#9DA3AF')
-
-  // gridLayer.append('g')
-  //   .call(
-  //     d3.axisLeft(y)
-  //       .tickFormat(id => {
-  //         const term = policyTimeline.terms.find(t => t.id === id)
-  //         return term?.label ?? id
-  //       })
-  //   )
-  //   .style('font-size', '12px')
-  //   .style('color', '#9DA3AF')
+    .style('color', '#475569')
 
   /* -------------------------------
     Term bars
   ------------------------------- */
-
-  const color = d3.scaleOrdinal()
-    .domain(policyTimeline.terms.map(d => d.id))
-    .range(termColors)
 
   termLayer
     .selectAll('.term-bar')
@@ -390,11 +431,72 @@ onMounted(() => {
       )
       .attr('height', endorsementLaneHeight)
       .attr('rx', 3)
-      // .attr('fill', '#94A3B8')
       .attr('fill', d => color(d.termId))
       .attr('opacity', 0.35)
-      // .attr('opacity', 0.9)
+
+    endorsementLayer
+      .selectAll('.endorsement-label')
+      .data(endorsements)
+      .enter()
+      .append('text')
+      .attr('class', 'term-label')
+      .attr('x', d => x(new Date(d.start)) + 6) // small left padding
+      .attr('y', d => {
+        const baseY = y(termId) + endorsementTopOffset + 10
+        return baseY + d._lane * (endorsementLaneHeight + endorsementLaneGap)
+      })
+      .attr('dominant-baseline', 'middle')
+      .attr('fill', (d, i) => {
+        console.log(d)
+        return color(d.termId)
+      })
+      .attr('fill-opacity', '1')
+      .attr('font-size', '11px')
+      .attr('font-weight', 700)
+      .attr('font-family', 'Geist, sans-serif')
+      .text(`1.2`)
+      .text((d, i) => {
+        const term = d.termId.replace('term-', '')
+        return `${term}.${i + 1}: ${d.type}`
+      })
+      .style('pointer-events', 'none')
+
   })
+
+  /* -------------------------------
+    Today Annotation
+  ------------------------------- */
+
+  const todayX = x(today)
+  const xPos = x(today)
+
+  const todayAnnotation = annotationLayer
+    .append('g')
+    .attr('class', 'today-annotation')
+    .attr('opacity', 1)
+
+  todayAnnotation
+    .append('line')
+    .attr('x1', todayX)
+    .attr('x2', todayX)
+    .attr('y1', 0)
+    .attr('y2', innerHeight)
+    .attr('stroke', '#64748b')          // slate
+    .attr('stroke-width', 1)
+    .attr('stroke-dasharray', '4,4')
+
+  todayAnnotation
+    .append('text')
+    .attr('x', todayX + 6)
+    .attr('y', 12)
+    .text('Today')
+    .attr('fill', '#475569')
+    .attr('font-size', '11px')
+    .attr('font-weight', 600)
+    .attr('font-family', 'Geist, sans-serif')
+    .attr('paint-order', 'stroke')
+    .attr('stroke', 'white')
+    .attr('stroke-width', 3)
 
   /* -------------------------------
     Handle Twilight
@@ -424,7 +526,7 @@ onMounted(() => {
     .attr('width', d => x(d.end) - x(d.start))
     .attr('height', innerHeight)
     .attr('fill', d => color(d.termId))
-    .attr('fill-opacity', 0.08)
+    .attr('fill-opacity', 0.15)
     .attr('stroke-opacity', 1)
     .attr('stroke', d => color(d.fromTermId))
     .attr('stroke-dasharray', '4,4')
@@ -491,28 +593,52 @@ onMounted(() => {
       `)
 })
 
+// Function
+function toggleTerm(termId) {
+  if (visibleTerms.value.has(termId)) {
+    visibleTerms.value.delete(termId)
+  } else {
+    visibleTerms.value.add(termId)
+  }
+}
+
 </script>
 
 <style>
 .term-bar {
-  transition: fill 0.2s ease;
+  transition: all 0.2s ease;
+  opacity: .9;
   cursor: pointer;
 }
 
 .term-bar:hover {
   /* fill: #94A3B8; */
+  opacity: 1;
 }
 
 .endorsement-bar {
   cursor: pointer;
-  transition: fill 0.2s ease, opacity 0.2s ease;
+  transition: all 0.2s ease, opacity 0.2s ease;
 }
 
 .endorsement-bar:hover {
-  opacity: 1;
+  opacity: .5;
 }
 
 .dimmed {
-  opacity: 0.15;
+  opacity: 0.35;
+}
+
+.term-checkbox .p-checkbox-box {
+  border-color: var(--term-color);
+}
+
+.term-checkbox.p-checkbox-checked .p-checkbox-box {
+  background-color: var(--term-color);
+  border-color: var(--term-color);
+}
+
+.term-checkbox .p-checkbox-icon {
+  color: white;
 }
 </style>

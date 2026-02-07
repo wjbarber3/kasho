@@ -8,7 +8,7 @@
               <h1 class="font-bold text-xl">Jordan Barber</h1>
             </div>
             <div class="flex items-center gap-x-4">
-              <NuxtLink to="resume" class="nav-item">Résumé</NuxtLink>
+              <!-- <NuxtLink to="resume" class="nav-item">Résumé</NuxtLink> -->
               <a class="nav-item" href="https://www.linkedin.com/in/jrdnbrbr/" target="_blank">
                 Linkedin
                 <i class="pi pi-arrow-up-right"></i>
@@ -18,11 +18,8 @@
           <div class="flex items-center gap-x-4">
             <div class="flex items-center gap-x-4">
               <NuxtLink to="#d3" class="nav-item">Data Visualization</NuxtLink>
+              <NuxtLink class="nav-item">Résumé</NuxtLink>
               <NuxtLink class="nav-item">Contact</NuxtLink>
-              <a class="nav-item" href="https://www.linkedin.com/in/jrdnbrbr/" target="_blank">
-                Linkedin
-                <i class="pi pi-arrow-up-right"></i>
-              </a>
             </div>
           </div>
         </div>

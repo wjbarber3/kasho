@@ -293,6 +293,7 @@ onMounted(() => {
   const gridLayer = g.append('g')
   const termLayer = g.append('g')
   const annotationLayer = g.append('g')
+  // const scrubberLayer = g.append('g')
   const twilightLayer = g.append('g')
   const endorsementLayer = g.append('g')
 
@@ -509,6 +510,46 @@ onMounted(() => {
     .attr('paint-order', 'stroke')
     .attr('stroke', 'white')
     .attr('stroke-width', 3)
+
+  /* -------------------------------
+    Scrubber
+  ------------------------------- */
+
+  // const scrubberLine = scrubberLayer
+  //   .append('line')
+  //   .attr('y1', 0)
+  //   .attr('y2', innerHeight)
+  //   .attr('stroke', '#334155')        // slate-700
+  //   .attr('stroke-width', 1)
+  //   .attr('stroke-dasharray', '4,4')
+  //   .attr('opacity', 0)
+  //   .style('pointer-events', 'none')
+
+  // const overlay = g.append('rect')
+  //   .attr('width', innerWidth)
+  //   .attr('height', innerHeight)
+  //   .attr('fill', 'transparent')
+  //   .style('pointer-events', 'all')
+  //   // .style('cursor', 'pointer')
+
+  // overlay
+  //   .on('mousemove', (event) => {
+  //     const [mouseX] = d3.pointer(event)
+
+  //     scrubberLine
+  //       .attr('x1', mouseX)
+  //       .attr('x2', mouseX)
+  //       .attr('opacity', 1)
+
+  //     const clampedX = Math.max(leftPadding, Math.min(mouseX, innerWidth))
+
+  //     scrubberLine
+  //       .attr('x1', clampedX)
+  //       .attr('x2', clampedX)
+  //   })
+  //   .on('mouseleave', () => {
+  //     scrubberLine.attr('opacity', 0)
+  //   })
 
   /* -------------------------------
     Handle Twilight

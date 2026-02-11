@@ -17,8 +17,8 @@
           <div class="flex items-center gap-x-4">
             <div class="flex items-center gap-x-4">
               <NuxtLink to="#d3" class="nav-item">Data Visualization</NuxtLink>
-              <NuxtLink class="nav-item">Résumé</NuxtLink>
-              <NuxtLink class="nav-item">Contact</NuxtLink>
+              <NuxtLink to="#resume" class="nav-item">Résumé</NuxtLink>
+              <NuxtLink to="#contact" class="nav-item">Contact</NuxtLink>
             </div>
           </div>
         </div>

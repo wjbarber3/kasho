@@ -37,10 +37,10 @@
           <span class="rounded-full inline-block w-2 h-2 bg-blue-400"></span>
           <p>Led frontend initiatives at a Series C startup</p>
         </li>
-        <li class="flex gap-x-3 items-center">
+        <!-- <li class="flex gap-x-3 items-center">
           <span class="rounded-full inline-block w-2 h-2 bg-blue-400"></span>
           <p>Designed and maintained a micro-frontend architecture using Nuxt, Tailwind, and Apollo Client</p>
-        </li>
+        </li> -->
         <li class="flex gap-x-3 items-center">
           <span class="rounded-full inline-block w-2 h-2 bg-blue-400"></span>
           <p>Built and maintained a GraphQL Node service layer</p>

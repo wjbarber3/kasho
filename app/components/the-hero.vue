@@ -1,5 +1,5 @@
 <template>
-  <div class="max-w-3xl grid grid-cols-2 w-full gap-x-4 items-center pt-10">
+  <div class="max-w-3xl grid grid-cols-2 w-full items-center pt-10">
     <img src="/images/hero2.png" class="w-[90%]" />
     <div class="flex items-center justify-center px-6">
       <div class="max-w-3xl w-full">

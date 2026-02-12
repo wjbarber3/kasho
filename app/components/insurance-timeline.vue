@@ -13,22 +13,6 @@
         <p>=</p>
         <p>Twilight Period</p>
       </div>
-
-      <!-- <p class="text-sm flex items-center gap-x-2">
-        <i class="pi pi-sparkles text-blue-400"></i>
-        <span>Hover across the chart to see the temperature anomaly for a given year</span>
-      </p>
-
-      <p class="text-sm flex items-center gap-x-2">
-        <i class="pi pi-sparkles text-blue-400"></i>
-        <span>Click each context title to learn more about the given event</span>
-      </p>
-
-      <p class="text-sm flex items-center gap-x-2">
-        <i class="pi pi-sparkles text-blue-400"></i>
-        <span>You can also hover a context event to highlight its line relevant to the chart</span>
-      </p> -->
-
     </div>
 
     <svg class="mx-auto" ref="svg" :width="width" :height="height"></svg>
@@ -217,7 +201,7 @@ const termColors = [
 
 const termColorPalette = [
   '#94C5FD',
-  '#2DD4BF',
+  '#34D399',
   '#C5B5FD',
 ]
 

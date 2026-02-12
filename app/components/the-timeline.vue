@@ -17,11 +17,11 @@
   </h1>
 
   <!-- Timeline Item -->
-  <div class="flex items-stretch">
+  <div class="flex items-stretch gap-x-2">
     <div class="relative flex flex-col items-center mr-4">
       <div class="absolute top-0 bottom-0 w-px bg-emerald-500"></div>
       <div class="relative h-10 w-10 rounded-full bg-white p-1 flex justify-center items-center border border-gray-200">
-        <div class="relative h-3 w-3 rounded-full bg-emerald-500 p-1 flex justify-center items-center animate-ping"></div>
+        <div class="relative h-3 w-3 rounded-full bg-amber-500 duration-1000 p-1 flex justify-center items-center animate-ping"></div>
       </div>
     </div>
 
@@ -32,7 +32,7 @@
         <p>&#124;</p>
         <p class="italic">2021 - Present</p>
       </div>
-      <ul class="text-sm text-slate-500 flex flex-col gap-y-2">
+      <ul class="text-sm text-slate-500 flex flex-col gap-y-2 ml-1 mt-1">
         <li class="flex gap-x-3 items-center">
           <span class="rounded-full inline-block w-2 h-2 bg-blue-400"></span>
           <p>Led frontend initiatives at a Series C startup</p>
@@ -63,7 +63,7 @@
 
   <!-- Repeat This Block for Each Entry -->
 
-  <div class="flex items-stretch">
+  <div class="flex items-stretch gap-x-2">
     <div class="relative flex flex-col items-center mr-4">
       <div class="absolute top-0 bottom-0 w-px bg-emerald-400"></div>
       <div class="w-11 h-11 relative border border-gray-200 bg-white p-2 rounded-full flex items-center justify-center">
@@ -78,16 +78,32 @@
         <p>&#124;</p>
         <p class="italic">2019 - 2021</p>
       </div>
-      <ul class="text-sm text-slate-500 flex flex-col gap-y-2">
+      <ul class="text-sm text-slate-500 flex flex-col gap-y-2 ml-1 mt-1">
         <li class="flex gap-x-3 items-center">
           <span class="rounded-full inline-block w-2 h-2 bg-blue-400"></span>
-          <p>Coming Soon</p>
+          <p>Led frontend architecture across multiple product domains</p>
+        </li>
+        <li class="flex gap-x-3 items-center">
+          <span class="rounded-full inline-block w-2 h-2 bg-blue-400"></span>
+          <p>Designed and scaled a shared design system</p>
+        </li>
+        <li class="flex gap-x-3 items-center">
+          <span class="rounded-full inline-block w-2 h-2 bg-blue-400"></span>
+          <p>Standardized end-to-end testing with Cypress</p>
+        </li>
+        <li class="flex gap-x-3 items-center">
+          <span class="rounded-full inline-block w-2 h-2 bg-blue-400"></span>
+          <p>Raised frontend quality through mentorship and code reviews</p>
+        </li>
+        <li class="flex gap-x-3 items-center">
+          <span class="rounded-full inline-block w-2 h-2 bg-blue-400"></span>
+          <p>Drove performance improvements across high-traffic applications</p>
         </li>
       </ul>
     </div>
   </div>
 
-  <div class="flex items-stretch">
+  <div class="flex items-stretch gap-x-2">
     <div class="relative flex flex-col items-center mr-4">
       <div class="absolute top-0 bottom-0 w-px bg-emerald-400"></div>
       <div class="w-11 h-11 relative border border-gray-200 bg-white p-2 rounded-full flex items-center justify-center">
@@ -102,16 +118,28 @@
         <p>&#124;</p>
         <p class="italic">2016 - 2019</p>
       </div>
-      <ul class="text-sm text-slate-500 flex flex-col gap-y-2">
+      <ul class="text-sm text-slate-500 flex flex-col gap-y-2 ml-1 mt-1">
         <li class="flex gap-x-3 items-center">
           <span class="rounded-full inline-block w-2 h-2 bg-blue-400"></span>
-          <p>Coming Soon</p>
+          <p>Delivered frontend solutions across React, Vue, Angular, and Aurelia</p>
+        </li>
+        <li class="flex gap-x-3 items-center">
+          <span class="rounded-full inline-block w-2 h-2 bg-blue-400"></span>
+          <p>Supported enterprise and consumer product teams</p>
+        </li>
+        <li class="flex gap-x-3 items-center">
+          <span class="rounded-full inline-block w-2 h-2 bg-blue-400"></span>
+          <p>Navigated diverse codebases and team structures</p>
+        </li>
+        <li class="flex gap-x-3 items-center">
+          <span class="rounded-full inline-block w-2 h-2 bg-blue-400"></span>
+          <p>Contributed to frontend hiring and technical evaluation</p>
         </li>
       </ul>
     </div>
   </div>
 
-  <div class="flex items-stretch ">
+  <div class="flex items-stretch gap-x-2">
     <div class="relative flex flex-col items-center mr-4">
       <div class="absolute top-0 bottom-0 w-px bg-emerald-400"></div>
       <div class="w-11 h-11 relative border border-gray-200 bg-white p-2 rounded-full flex items-center justify-center">
@@ -126,16 +154,23 @@
         <p>&#124;</p>
         <p class="italic">2014 - 2016</p>
       </div>
-      <ul class="text-sm text-slate-500 flex flex-col gap-y-2">
+      <ul class="text-sm text-slate-500 flex flex-col gap-y-2 ml-1 mt-1">
         <li class="flex gap-x-3 items-center">
           <span class="rounded-full inline-block w-2 h-2 bg-blue-400"></span>
-          <p>Coming Soon</p>
+          <p>Delivered frontend applications for higher-education institutions</p>
+        </li>
+        <li class="flex gap-x-3 items-center">
+          <span class="rounded-full inline-block w-2 h-2 bg-blue-400"></span>
+          <p>Partnered with design and backend teams across multiple client engagements</p>
+        </li>
+        <li class="flex gap-x-3 items-center">
+          <span class="rounded-full inline-block w-2 h-2 bg-blue-400"></span>
+          <p>Established foundational frontend practices in fast-paced agency environments</p>
         </li>
       </ul>
     </div>
   </div>
 </div>
-
 </template>
 
 <script setup></script>

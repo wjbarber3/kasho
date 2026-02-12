@@ -5,6 +5,7 @@
         <div class="flex justify-between items-center w-full">
           <div class="flex justify-between items-center gap-x-8">
             <div class="flex items-center gap-x-4">
+              <img src="/images/logo-circle-small.png" alt="" class="w-6">
               <h1 class="font-bold text-xl">Jordan Barber</h1>
             </div>
             <div class="flex items-center gap-x-4">

@@ -4,7 +4,7 @@
   </div>
   
   <!-- Timeline -->
-  <div class="w-screen h-auto bg-slate-100 flex items-center justify-center py-24">
+  <div class="w-screen h-auto bg-slate-100 flex items-center justify-center pb-24 pt-10">
     <the-timeline />
   </div>
 

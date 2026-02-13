@@ -1,5 +1,5 @@
 <template>
-  <div class="max-w-7xl z-10 flex items-center gap-4 w-full pt-4 sticky top-0 mx-auto text-nowrap">
+  <div class="max-w-[95%] xl:max-w-7xl z-10 flex items-center gap-4 w-full pt-4 sticky top-0 mx-auto text-nowrap">
     <nav class="w-full flex relative items-center">
       <div class="rounded px-4 py-2 w-full bg-white text-slate-900 flex items-center border border-slate-200 opacity-95">
         <div class="flex justify-between items-center w-full">
@@ -9,17 +9,20 @@
               <h1 class="font-bold text-xl">Jordan Barber</h1>
             </div>
             <div class="flex items-center gap-x-4">
-              <a class="nav-item" href="https://www.linkedin.com/in/jrdnbrbr/" target="_blank">
+              <a class="nav-item hidden! md:flex!" href="https://www.linkedin.com/in/jrdnbrbr/" target="_blank">
                 Linkedin
                 <i class="pi pi-arrow-up-right"></i>
-              </a>
+              </a>              
             </div>
           </div>
           <div class="flex items-center gap-x-4">
             <div class="flex items-center gap-x-4">
-              <NuxtLink to="#d3" class="nav-item">Data Visualization</NuxtLink>
-              <NuxtLink to="#resume" class="nav-item">Résumé</NuxtLink>
-              <NuxtLink to="#contact" class="nav-item">Contact</NuxtLink>
+              <a class="nav-item flex md:hidden!" href="https://www.linkedin.com/in/jrdnbrbr/" target="_blank">
+                <i class="pi pi-linkedin"></i>
+              </a>
+              <NuxtLink to="#d3" class="nav-item hidden! md:flex!">Data Visualization</NuxtLink>
+              <NuxtLink to="#resume" class="nav-item hidden! md:flex!">Résumé</NuxtLink>
+              <NuxtLink to="#contact" class="nav-item hidden! md:flex!">Contact</NuxtLink>
             </div>
           </div>
         </div>

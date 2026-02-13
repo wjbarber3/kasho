@@ -1,6 +1,6 @@
 <template>
-  <div class="max-w-3xl grid grid-cols-2 w-full items-center pt-10">
-    <img src="/images/hero2.png" class="w-[90%]" />
+  <div class="max-w-3xl grid md:grid-cols-2 w-full items-center pt-20 md:pt-10 mb-10 md:mb-0">
+    <img src="/images/hero2.png" class="w-[90%] hidden md:block" />
     <div class="flex items-center justify-center px-6">
       <div class="max-w-3xl w-full">
         
@@ -22,10 +22,12 @@
         </p>
 
         <div class="flex items-center gap-x-8 mt-6">
-          <Button class="bg-amber-300! text-slate-950! border-amber-300!">
-            <i class="pi pi-arrow-down text-slate-950"></i>
-            Work History
-          </Button>
+          <NuxtLink to="#resume">
+            <Button class="bg-amber-300! text-slate-950! border-amber-300!">
+              <i class="pi pi-arrow-down text-slate-950"></i>
+              Work History
+            </Button>
+          </NuxtLink>
           <p>
             <!-- <i class="pi pi-download text-blue-400"></i> -->
             <a href="#" class="text-emerald-500 underline font-bold">Get in touch</a>

@@ -19,7 +19,7 @@
 
   <!-- Timeline Item -->
   <div class="flex items-stretch gap-x-2">
-    <div class="relative flex flex-col items-center mr-4">
+    <div class="relative flex flex-col items-center mr-2 md:mr-4">
       <div class="absolute top-0 bottom-0 w-px bg-emerald-500"></div>
       <div class="relative h-10 w-10 rounded-full bg-white p-1 flex justify-center items-center border border-gray-200">
         <div class="relative h-3 w-3 rounded-full bg-amber-400 duration-1000 p-1 flex justify-center items-center animate-ping"></div>
@@ -65,7 +65,7 @@
   <!-- Repeat This Block for Each Entry -->
 
   <div class="flex items-stretch gap-x-2">
-    <div class="relative flex flex-col items-center mr-4">
+    <div class="relative flex flex-col items-center mr-2 md:mr-4">
       <div class="absolute top-0 bottom-0 w-px bg-emerald-400"></div>
       <div class="w-11 h-11 relative border border-gray-200 bg-white p-2 rounded-full flex items-center justify-center">
         <img src="/images/cm-favicon.svg" class="w-[90%]" />
@@ -105,7 +105,7 @@
   </div>
 
   <div class="flex items-stretch gap-x-2">
-    <div class="relative flex flex-col items-center mr-4">
+    <div class="relative flex flex-col items-center mr-2 md:mr-4">
       <div class="absolute top-0 bottom-0 w-px bg-emerald-400"></div>
       <div class="w-11 h-11 relative border border-gray-200 bg-white p-2 rounded-full flex items-center justify-center">
         <img src="/images/robert-half.webp" class="w-[90%]" />
@@ -141,7 +141,7 @@
   </div>
 
   <div class="flex items-stretch gap-x-2">
-    <div class="relative flex flex-col items-center mr-4">
+    <div class="relative flex flex-col items-center mr-2 md:mr-4">
       <div class="absolute top-0 bottom-0 w-px bg-emerald-400"></div>
       <div class="w-11 h-11 relative border border-gray-200 bg-white p-2 rounded-full flex items-center justify-center">
         <img src="/images/up-and-up.jpeg" class="full" />

@@ -7,7 +7,7 @@
         <!-- Intro -->
         <div class="text-sm tracking-widest text-gray-500 uppercase mb-4 flex items-center gap-x-3">
           <div class="w-4 h-0.5 bg-slate-500"></div>
-          <p>Hey there. I'm a <span class="bg-blue-100 px-1">Senior</span></p>
+          <p>Hey there. I'm a <span class="bg-sky-100 px-1">Senior</span></p>
         </div>
 
         <!-- Main Heading -->
@@ -21,9 +21,24 @@
           I specialize in architecture, design systems, and performance-driven user experiences.
         </p>
 
+        <div class="flex items-center gap-x-8 mt-6">
+          <Button class="bg-amber-300! text-slate-950! border-amber-300!">
+            <i class="pi pi-arrow-down text-slate-950"></i>
+            Work History
+          </Button>
+          <p>
+            <!-- <i class="pi pi-download text-blue-400"></i> -->
+            <a href="#" class="text-emerald-500 underline font-bold">Get in touch</a>
+          </p>
+        </div>
+
       </div>
     </div>
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+
+import Button from 'primevue/button'
+
+</script>

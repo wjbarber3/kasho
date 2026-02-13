@@ -8,7 +8,11 @@
     <the-timeline />
   </div>
 
-  <div id="d3" class="py-28 bg-stone-900">
+  <div class="w-screen h-auto bg-slate-100 flex items-center justify-center pb-24 pt-10">
+    <d3-intro />
+  </div>
+
+  <div class="py-28 bg-stone-900">
     <warming-chart />
   </div>
 

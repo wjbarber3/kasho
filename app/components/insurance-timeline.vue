@@ -194,15 +194,15 @@ const visibleTerms = ref(
 ----------------------------------- */
 
 const termColors = [
-  '#94C5FD',
-  '#2DD4BF',
-  '#C5B5FD',
+  '#39BEF8',
+  '#34D399',
+  '#A88BFA',
 ]
 
 const termColorPalette = [
-  '#94C5FD',
+  '#39BEF8',
   '#34D399',
-  '#C5B5FD',
+  '#A88BFA',
 ]
 
 const termIndexMap = {}

@@ -1,5 +1,5 @@
 <template>
-<div id="resume" class="max-w-3xl mx-auto px-4">
+<div class="max-w-3xl mx-auto px-4">
 
   <p class="mb-4">
     Over the past <span class="font-bold">13 years</span>, I’ve worked across a wide range of tech stacks, teams, and product environments. I began my career at an award-winning agency, balancing web design and frontend development while building applications for higher-education institutions. From there, I moved into consulting across companies in Denver, sharpening my ability to adapt quickly and deliver in diverse environments. For the past eight years, I’ve focused on product and startup teams—leading frontend architecture, design systems, and performance initiatives at scale.
@@ -11,6 +11,7 @@
   </p>
 
   <hr class="my-8">
+  
 
   <h1 class="text-lg tracking-widest font-bold text-emerald-500 mb-6">
     My Work History
@@ -21,7 +22,7 @@
     <div class="relative flex flex-col items-center mr-4">
       <div class="absolute top-0 bottom-0 w-px bg-emerald-500"></div>
       <div class="relative h-10 w-10 rounded-full bg-white p-1 flex justify-center items-center border border-gray-200">
-        <div class="relative h-3 w-3 rounded-full bg-amber-500 duration-1000 p-1 flex justify-center items-center animate-ping"></div>
+        <div class="relative h-3 w-3 rounded-full bg-amber-400 duration-1000 p-1 flex justify-center items-center animate-ping"></div>
       </div>
     </div>
 

@@ -18,21 +18,33 @@
           <div class="flex items-center gap-x-4">
             <div class="flex items-center gap-x-4">
               <a class="nav-item flex md:hidden!" href="https://www.linkedin.com/in/jrdnbrbr/" target="_blank">
-                <i class="pi pi-linkedin"></i>
+                <i class="pi pi-linkedin text-sky-500"></i>
               </a>
               <NuxtLink to="#d3" class="nav-item hidden! md:flex!">Data Visualization</NuxtLink>
               <NuxtLink to="#resume" class="nav-item hidden! md:flex!">Résumé</NuxtLink>
               <NuxtLink to="#contact" class="nav-item hidden! md:flex!">Contact</NuxtLink>
+              <a class="nav-item flex md:hidden!" href="#" @click="showMobileMenu = !showMobileMenu">
+                <i class="pi pi-bars"></i>
+              </a>
             </div>
           </div>
         </div>
       </div>
     </nav>
+    <Drawer v-model:visible="showMobileMenu" header="Menu">
+      <NuxtLink to="#d3" class="nav-item" @click="showMobileMenu = false">Data Visualization</NuxtLink>
+      <NuxtLink to="#resume" class="nav-item" @click="showMobileMenu = false">Résumé</NuxtLink>
+      <NuxtLink to="#contact" class="nav-item" @click="showMobileMenu = false">Contact</NuxtLink>
+    </Drawer>
   </div>
 </template>
 
 <script setup>
   import Button from 'primevue/button'
+  import Drawer from 'primevue/drawer';
+
+  const showMobileMenu = ref(false)
+
 </script>
 
 <style scoped>

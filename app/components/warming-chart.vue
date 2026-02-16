@@ -308,15 +308,15 @@ onMounted(async () => {
 
   gradient.append('stop')
     .attr('offset', '0%')
-    .attr('stop-color', '#23c2ed') // cooler past
+    .attr('stop-color', '#52A1FF') // cooler past
 
   gradient.append('stop')
     .attr('offset', `${(zeroY / innerHeight) * 100}%`)
-    .attr('stop-color', '#c9c9c9') // neutral at 0°C
+    .attr('stop-color', '#CBD5E1') // neutral at 0°C
 
   gradient.append('stop')
     .attr('offset', '100%')
-    .attr('stop-color', '#ED4E23') // warming present
+    .attr('stop-color', '#EA580B') // warming present
   // --------------------------------
 
   // line generator

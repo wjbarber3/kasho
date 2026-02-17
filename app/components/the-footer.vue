@@ -46,11 +46,8 @@
   
     <!-- Bottom Bar -->
     <div class="border-t border-gray-300">
-      <div class="max-w-7xl mx-auto px-6 py-6 flex flex-col md:flex-row justify-between items-center text-sm text-gray-600">
+      <div class="max-w-7xl mx-auto px-6 py-6 flex flex-col md:flex-row justify-center items-center text-sm text-gray-600">
         <p>© Copyright by Jordan Barber 2026. All rights reserved.</p>
-        <div class="flex space-x-6 mt-4 md:mt-0">
-          <a href="#" class="hover:text-blue-600">Site Map</a>
-        </div>
       </div>
     </div>
   </footer>

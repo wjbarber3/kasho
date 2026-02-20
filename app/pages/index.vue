@@ -11,7 +11,7 @@
     <contact-form />
   </div>
 
-  <div class="w-screen h-auto bg-teal-500 flex items-center justify-center py-16 md:py-24 relative overflow-hidden">
+  <div id="d3" class="w-screen h-auto bg-teal-500 flex items-center justify-center py-16 md:py-24 relative overflow-hidden">
     <d3-intro />
     <div class="hidden sm:block w-[400px] h-[200px] absolute bottom-0 -right-52 
             bg-linear-to-r from-teal-500 to-teal-100
@@ -38,7 +38,7 @@
     <insurance-timeline />
   </div>
 
-  <the-footer />
+  <the-footer class="bg-white" />
 
 </template>
 

@@ -17,10 +17,10 @@
   
           <!-- Social Icons -->
           <div class="flex space-x-4 text-gray-700 justify-center md:justify-start">
-            <a href="#" class="hover:text-blue-500">
+            <a href="https://github.com/wjbarber3" class="hover:text-blue-500" target="_blank">
               <i class="pi pi-github"></i>
             </a>
-            <a href="#" class="hover:text-blue-500">
+            <a href="https://www.linkedin.com/in/jrdnbrbr/" target="_blank" class="hover:text-blue-500">
               <i class="pi pi-linkedin"></i>
             </a>
           </div>

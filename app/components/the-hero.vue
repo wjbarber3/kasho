@@ -29,8 +29,7 @@
             </Button>
           </NuxtLink>
           <p>
-            <!-- <i class="pi pi-download text-blue-400"></i> -->
-            <a href="#" class="text-emerald-500 underline font-bold">Get in touch</a>
+            <NuxtLink to="#contact" class="text-emerald-500 underline font-bold">Get in touch</NuxtLink>
           </p>
         </div>
 

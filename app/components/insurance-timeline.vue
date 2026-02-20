@@ -1,7 +1,7 @@
 <template>
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center gap-y-4">
     <div class="flex justify-between flex-col items center w-full items-center gap-y-1 text-slate-800">
-      <h1 class="text-4xl font-bold">Insurance Policy Timeline</h1>
+      <h1 class="text-2xl md:text-4xl font-bold">Insurance Policy Timeline</h1>
       <p class="mb-2 italic">
         Coverage terms and change endorsements over time
       </p>
@@ -15,7 +15,15 @@
       </div>
     </div>
 
-    <svg class="mx-auto" ref="svg" :width="width" :height="height"></svg>
+    <!-- <svg class="mx-auto" ref="svg" :width="width" :height="height"></svg> -->
+
+    <svg
+        ref="svg"
+        class="mx-auto w-full h-auto max-w-200"
+        :viewBox="`0 0 ${width} ${height}`"
+        preserveAspectRatio="xMidYMid meet"
+      >
+    </svg> 
 
     <div class="flex gap-x-8 mt-4 flex-wrap justify-center text-xs">
       <div

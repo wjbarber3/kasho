@@ -3,15 +3,15 @@
     <the-hero />
   </div>
   
-  <div id="resume" class="w-screen h-auto bg-slate-100 flex items-center justify-center pb-24 pt-10">
+  <div id="resume" class="w-screen h-auto bg-slate-100 flex items-center justify-center pb-16 md:pb-24 pt-10">
     <the-timeline />
   </div>
 
-  <div id="contact" class="w-screen h-aut bg-slate-100 flex items-center justify-center pt-4 pb-40">
+  <div id="contact" class="w-screen h-aut bg-slate-100 flex items-center justify-center pt-4 pb-16 md:pb-40">
     <contact-form />
   </div>
 
-  <div class="w-screen h-auto bg-teal-500 flex items-center justify-center pb-24 pt-24 relative overflow-hidden">
+  <div class="w-screen h-auto bg-teal-500 flex items-center justify-center py-16 md:py-24 relative overflow-hidden">
     <d3-intro />
     <div class="hidden sm:block w-[400px] h-[200px] absolute bottom-0 -right-52 
             bg-linear-to-r from-teal-500 to-teal-100
@@ -30,11 +30,11 @@
     <div class="hidden lg:block w-[40px] h-[140px] absolute bottom-0 right-[280px] bg-linear-to-r from-teal-500 to-teal-400"></div>
   </div>
 
-  <div class="py-28 bg-stone-900">
+  <div class="py-16 md:py-28 bg-stone-900">
     <warming-chart />
   </div>
 
-  <div class="py-28 bg-slate-100">
+  <div class="py-16 md:py-28 bg-slate-100">
     <insurance-timeline />
   </div>
 

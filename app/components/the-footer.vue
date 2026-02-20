@@ -1,22 +1,22 @@
 <template>
   <footer class="bg-gray-100 text-gray-700">
     <div class="max-w-7xl mx-auto px-6 py-16">
-      <div class="flex items-start justify-between">
+      <div class="flex flex-col md:flex-row justify-between gap-y-8 text-center md:text-left">
         
         <!-- Left Section -->
         <div>
           <!-- Logo -->
-          <div class="flex items-center gap-x-4 mb-6">
+          <div class="flex items-center gap-x-4 mb-6 justify-center md:justify-start">
               <img src="/images/logo-circle-small.png" alt="" class="w-8">
               <h1 class="font-bold text-xl">Jordan Barber</h1>
             </div>
   
-          <p class="text-gray-500 leading-relaxed mb-6 max-w-md">
+          <p class="text-gray-500 leading-relaxed mb-6 w-full md:max-w-md">
             Building modern, user-focused digital experiences with clarity and purpose.
           </p>
   
           <!-- Social Icons -->
-          <div class="flex space-x-4 text-gray-700">
+          <div class="flex space-x-4 text-gray-700 justify-center md:justify-start">
             <a href="#" class="hover:text-blue-500">
               <i class="pi pi-github"></i>
             </a>

@@ -6,7 +6,7 @@
         Global temperature anomaly relative to 1951-1980 average.
       </p>
 
-      <Divider class="max-w-xl" />
+      <Divider class="max-w-xl opacity-30" />
 
       <p class="text-sm flex items-center gap-x-2">
         <i class="pi pi-sparkles text-yellow-200"></i>

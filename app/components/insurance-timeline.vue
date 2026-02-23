@@ -25,7 +25,8 @@
       >
     </svg> 
 
-    <div class="flex gap-x-8 mt-4 flex-wrap justify-center text-xs">
+    <!-- @todo Add Checkboxes when wired -->
+    <!-- <div class="flex gap-x-8 mt-4 flex-wrap justify-center text-xs">
       <div
         v-for="term in policyTimeline.terms"
         :key="term.id"
@@ -52,7 +53,7 @@
           {{ term.label }}
         </label>
       </div>
-    </div>
+    </div> -->
 
 
   </div>

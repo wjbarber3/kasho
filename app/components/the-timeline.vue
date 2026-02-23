@@ -7,7 +7,7 @@
 
   <p class="mb-4 flex gap-x-2 items-center">
     <i class="pi pi-download text-blue-400"></i>
-    <a href="#" class="text-blue-500 underline font-bold">Download</a> a print-friendly version of my resume.
+    <a href="/files/JordanBarber-Resume2026.pdf" download class="text-blue-500 underline font-bold">Download</a> a print-friendly version of my resume.
   </p>
 
   <hr class="my-8">

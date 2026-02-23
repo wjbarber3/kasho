@@ -5,7 +5,7 @@
       <h1 class="text-4xl font-bold">Let's chat.</h1>
       <p class="max-w-[80%] mx-auto md:max-w-2xl mt-2">
         I work at the intersection of product thinking and high-quality frontend execution.
-If that’s where you’re headed, let’s chat.
+If that’s where you’re headed, I'd love to talk.
       </p>
     </div>
     <div class="grid grid-cols-12 gap-x-4 rounded-2xl bg-white p-4">
@@ -40,11 +40,23 @@ If that’s where you’re headed, let’s chat.
               <Message v-if="$form.fullName?.invalid" severity="error" size="small" variant="simple">{{ $form.fullName?.error?.message }}</Message>
             </div>
             <div>
-              <InputText name="phone" type="text" placeholder="Phone" fluid />
+              <InputText
+                name="phone"
+                type="tel"
+                autocomplete="tel"
+                placeholder="Phone"
+                fluid
+              />
               <Message v-if="$form.phone?.invalid" severity="error" size="small" variant="simple">{{ $form.phone.error?.message }}</Message>
             </div>
             <div>
-              <InputText name="email" type="text" placeholder="Email" fluid />
+              <InputText
+                name="email"
+                type="email"
+                autocomplete="email"
+                placeholder="Email"
+                fluid
+              />
               <Message v-if="$form.email?.invalid" severity="error" size="small" variant="simple">{{ $form.email.error?.message }}</Message>
             </div>
             <div class="col-span-2">
@@ -80,33 +92,64 @@ import Textarea from 'primevue/textarea'
 const toast = useToast()
 const isFormSubmitting = ref(false)
 
+
+
+const emailRegex =
+  /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
+const phoneRegex =
+  /^\+?[1-9]\d{9,14}$/; // International-safe (E.164 style)
+
 const resolver = ({ values }) => {
-    const errors = {};
+  const errors = {};
 
-    if (!values.fullName) {
-        errors.fullName = [{ message: 'Name is required.' }];
-    }
+  const trimmed = {
+    fullName: values.fullName?.trim(),
+    phone: values.phone?.trim(),
+    email: values.email?.trim(),
+    subject: values.subject?.trim(),
+    message: values.message?.trim()
+  };
 
-    if (!values.phone) {
-        errors.phone = [{ message: 'Phone is required.' }];
-    }
+  // Full Name
+  if (!trimmed.fullName) {
+    errors.fullName = [{ message: 'Full name is required.' }];
+  } else if (trimmed.fullName.length < 2) {
+    errors.fullName = [{ message: 'Name must be at least 2 characters.' }];
+  }
 
-    if (!values.email) {
-        errors.email = [{ email: 'Email is required.' }];
-    }
+  // Email
+  if (!trimmed.email) {
+    errors.email = [{ message: 'Email is required.' }];
+  } else if (!emailRegex.test(trimmed.email)) {
+    errors.email = [{ message: 'Please enter a valid email address.' }];
+  }
 
-    if (!values.subject) {
-        errors.subject = [{ message: 'Subject is required.' }];
-    }
+  // Phone
+  if (!trimmed.phone) {
+    errors.phone = [{ message: 'Phone number is required.' }];
+  } else if (!phoneRegex.test(trimmed.phone)) {
+    errors.phone = [{ message: 'Enter a valid phone number.' }];
+  }
 
-    if (!values.message) {
-        errors.message = [{ message: 'Message is required.' }];
-    }
+  // Subject
+  if (!trimmed.subject) {
+    errors.subject = [{ message: 'Subject is required.' }];
+  } else if (trimmed.subject.length < 3) {
+    errors.subject = [{ message: 'Subject is too short.' }];
+  }
 
-    return {
-        values,
-        errors
-    };
+  // Message
+  if (!trimmed.message) {
+    errors.message = [{ message: 'Message is required.' }];
+  } else if (trimmed.message.length < 10) {
+    errors.message = [{ message: 'Message should be at least 10 characters.' }];
+  }
+
+  return {
+    values: trimmed,
+    errors
+  };
 };
 
 const onFormSubmit = async ({ valid, values, reset }) => {
@@ -152,3 +195,11 @@ const onFormSubmit = async ({ valid, values, reset }) => {
 };
 
 </script>
+
+<style>
+
+.p-inputtext.p-invalid {
+  color: rgb(248, 113, 113);
+}
+
+</style>

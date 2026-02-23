@@ -3,7 +3,7 @@
   <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center gap-y-4">
     <div class="text-center mb-8">
       <h1 class="text-4xl font-bold">Let's chat.</h1>
-      <p class="max-w-full md:max-w-2xl mt-2">
+      <p class="max-w-[80%] mx-auto md:max-w-2xl mt-2">
         I work at the intersection of product thinking and high-quality frontend execution.
 If that’s where you’re headed, let’s chat.
       </p>
@@ -12,7 +12,7 @@ If that’s where you’re headed, let’s chat.
       <div class="w-full p-10 col-span-12 md:col-span-5 bg-blue-400 rounded-2xl md:h-96 relative overflow-hidden text-white">
         <h1 class="font-bold text-2xl">Contact Info:</h1>
         <p class="text-xs">Drop me a line.</p>
-        <div class="flex flex-col gap-y-4 mt-6 font-medium">
+        <div class="flex flex-col gap-y-4 mt-6 font-medium relative z-10">
           <div class="flex items-center gap-x-3">
             <i class="pi pi-phone" />
             <p>864.720.9494</p>
@@ -26,7 +26,7 @@ If that’s where you’re headed, let’s chat.
             <p>Denver, CO</p>
           </div>
         </div>
-        <div class="rounded-full bg-linear-to-r from-blue-400 to-blue-100 w-72 h-72 absolute -bottom-36 -right-24"></div>
+        <div class="z-0 rounded-full bg-linear-to-r from-blue-400 to-blue-100 w-72 h-72 absolute -bottom-36 -right-24"></div>
       </div>
       <Form
         v-slot="$form" :initialValues

@@ -5,7 +5,7 @@
     Over the past <span class="font-bold">13 years</span>, I’ve worked across a wide range of tech stacks, teams, and product environments. I began my career at an award-winning agency, balancing web design and frontend development while building applications for higher-education institutions. From there, I moved into consulting across companies in Denver, sharpening my ability to adapt quickly and deliver in diverse environments. For the past eight years, I’ve focused on product and startup teams—leading frontend architecture, design systems, and performance initiatives at scale.
   </p>
 
-  <p class="mb-4 flex gap-x-2 items-center">
+  <p class="mb-4 flex gap-x-2 items-center text-sm md:text-base">
     <i class="pi pi-download text-blue-400"></i>
     <a href="/files/JordanBarber-Resume2026.pdf" download class="text-blue-500 underline font-bold">Download</a> a print-friendly version of my resume.
   </p>

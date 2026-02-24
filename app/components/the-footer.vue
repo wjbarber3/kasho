@@ -7,7 +7,7 @@
         <div>
           <!-- Logo -->
           <div class="flex items-center gap-x-4 mb-6 justify-center md:justify-start">
-              <img src="/images/logo-circle-small.png" alt="" class="w-8">
+              <img src="/images/logo-circle-small.png" alt="logo" class="w-8">
               <h1 class="font-bold text-xl">Jordan Barber</h1>
             </div>
   

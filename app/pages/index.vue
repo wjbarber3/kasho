@@ -43,3 +43,12 @@
 </template>
 
 <script setup></script>
+
+<script setup>
+  useHead({
+    title: 'Jordan Barber | Portfolio',
+    meta: [
+      { name: 'description', content: 'Jordan Barber - Senior Frontend Engineer' }
+    ]
+  })
+</script>

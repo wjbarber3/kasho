@@ -538,14 +538,17 @@ watch(showAnnotations, (visible) => {
 <style scoped>
 body {
   font-family: 'Geist', sans-serif;
+  display: 'swap';
 }
 
 h1 {
   font-family: 'Rethink Sans', sans-serif;
+  display: 'swap';
 }
 
 p {
   font-family: 'Geist', sans-serif;
+  display: 'swap';
 }
 
 </style>

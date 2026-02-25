@@ -29,7 +29,7 @@
             </Button>
           </NuxtLink>
           <p>
-            <NuxtLink to="#contact" class="text-emerald-500 underline font-bold">Get in touch</NuxtLink>
+            <NuxtLink to="#contact" class="text-emerald-600 underline font-bold">Get in touch</NuxtLink>
           </p>
         </div>
 

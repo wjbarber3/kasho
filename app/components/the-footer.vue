@@ -17,11 +17,11 @@
   
           <!-- Social Icons -->
           <div class="flex space-x-4 text-gray-700 justify-center md:justify-start">
-            <a href="https://github.com/wjbarber3" class="hover:text-blue-500" target="_blank">
-              <i class="pi pi-github"></i>
+            <a href="https://github.com/wjbarber3" class="hover:text-blue-500" target="_blank" aria-label="GitHub profile">
+              <i class="pi pi-github" aria-hidden="true"></i>
             </a>
-            <a href="https://www.linkedin.com/in/jrdnbrbr/" target="_blank" class="hover:text-blue-500">
-              <i class="pi pi-linkedin"></i>
+            <a href="https://www.linkedin.com/in/jrdnbrbr/" target="_blank" class="hover:text-blue-500" aria-label="Linkedin profile">
+              <i class="pi pi-linkedin" aria-hidden="true"></i>
             </a>
           </div>
         </div>

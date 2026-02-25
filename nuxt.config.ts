@@ -14,8 +14,8 @@ export default defineNuxtConfig({
   fonts: {
     families: [
       // Optional: specify families and weights for better control
-      { name: 'Rethink Sans', weights: [400, 500, 600, 700] },
-      { name: 'Geist', weights: [400, 500, 600, 700] },
+      { name: 'Rethink Sans', weights: [400, 500, 600, 700], display: 'swap' },
+      { name: 'Geist', weights: [400, 500, 600, 700], display: 'swap' },
     ]
     // Other configuration options can be found in the documentation
   },

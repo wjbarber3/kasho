@@ -28,6 +28,8 @@
     <div class="hidden lg:block w-[40px] h-[100px] absolute bottom-0 right-[360px] bg-linear-to-r from-teal-500 to-teal-400"></div>
     <div class="hidden lg:block w-[40px] h-[120px] absolute bottom-0 right-[320px] bg-linear-to-r from-teal-500 to-teal-400"></div>
     <div class="hidden lg:block w-[40px] h-[140px] absolute bottom-0 right-[280px] bg-linear-to-r from-teal-500 to-teal-400"></div>
+    <div class="hidden sm:block z-0 rounded-full bg-linear-to-r from-teal-300 to-teal-500 w-72 h-72 absolute -bottom-36 -left-24"></div>
+
   </div>
 
   <div class="py-16 md:py-28 bg-stone-900">

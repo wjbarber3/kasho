@@ -8,9 +8,9 @@
       <p>+</p>
       <img alt="vue-logo" src="/images/vue-all-white.svg" class="h-5 grow-0">
     </div>
-    <a href="#" class="text-white underline font-bold mt-8 block">See examples below
+    <NuxtLink to="#global-warming-chart" class="text-white underline font-bold mt-8 block">See examples below
       <i class="pi pi-arrow-down text-white ml-2"></i>
-    </a>
+    </NuxtLink>
   </div>
 </template>
 

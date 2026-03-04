@@ -31,7 +31,7 @@
       <div class="text-slate-500 text-sm flex items-center gap-x-2">
         <p class="text-emerald-900 font-bold">Openly Insurance</p>
         <p>&#124;</p>
-        <p class="italic">2021 - Present</p>
+        <p class="italic text-slate-900">2021 - Present</p>
       </div>
       <ul class="text-sm text-slate-500 flex flex-col gap-y-2 ml-1 mt-1">
         <li class="flex gap-x-3 items-center">
@@ -77,7 +77,7 @@
       <div class="text-slate-500 text-sm flex items-center gap-x-2">
         <p class="text-emerald-900 font-bold">Creative Market / Dribbble</p>
         <p>&#124;</p>
-        <p class="italic">2019 - 2021</p>
+        <p class="italic text-slate-900">2019 - 2021</p>
       </div>
       <ul class="text-sm text-slate-500 flex flex-col gap-y-2 ml-1 mt-1">
         <li class="flex gap-x-3 items-center">
@@ -117,7 +117,7 @@
       <div class="text-slate-500 text-sm flex items-center gap-x-2">
         <p class="text-emerald-900 font-bold">The Creative Group</p>
         <p>&#124;</p>
-        <p class="italic">2016 - 2019</p>
+        <p class="italic text-slate-900">2016 - 2019</p>
       </div>
       <ul class="text-sm text-slate-500 flex flex-col gap-y-2 ml-1 mt-1">
         <li class="flex gap-x-3 items-center">
@@ -153,7 +153,7 @@
       <div class="text-slate-500 text-sm flex items-center gap-x-2">
         <p class="text-emerald-900 font-bold">Up&Up Agency</p>
         <p>&#124;</p>
-        <p class="italic">2014 - 2016</p>
+        <p class="italic text-slate-900">2014 - 2016</p>
       </div>
       <ul class="text-sm text-slate-500 flex flex-col gap-y-2 ml-1 mt-1">
         <li class="flex gap-x-3 items-center">

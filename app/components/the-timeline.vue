@@ -33,7 +33,7 @@
         <p>&#124;</p>
         <p class="italic text-slate-900">2021 - Present</p>
       </div>
-      <ul class="text-sm text-slate-500 flex flex-col gap-y-2 ml-1 mt-1">
+      <ul class="text-sm text-slate-700 flex flex-col gap-y-2 ml-1 mt-1">
         <li class="flex gap-x-3 items-center">
           <span class="rounded-full inline-block w-2 h-2 bg-blue-400"></span>
           <p>Led frontend initiatives at a Series C startup</p>
@@ -79,7 +79,7 @@
         <p>&#124;</p>
         <p class="italic text-slate-900">2019 - 2021</p>
       </div>
-      <ul class="text-sm text-slate-500 flex flex-col gap-y-2 ml-1 mt-1">
+      <ul class="text-sm text-slate-700 flex flex-col gap-y-2 ml-1 mt-1">
         <li class="flex gap-x-3 items-center">
           <span class="rounded-full inline-block w-2 h-2 bg-blue-400"></span>
           <p>Led frontend architecture across multiple product domains</p>
@@ -119,7 +119,7 @@
         <p>&#124;</p>
         <p class="italic text-slate-900">2016 - 2019</p>
       </div>
-      <ul class="text-sm text-slate-500 flex flex-col gap-y-2 ml-1 mt-1">
+      <ul class="text-sm text-slate-700 flex flex-col gap-y-2 ml-1 mt-1">
         <li class="flex gap-x-3 items-center">
           <span class="rounded-full inline-block w-2 h-2 bg-blue-400"></span>
           <p>Delivered frontend solutions across React, Vue, Angular, and Aurelia</p>
@@ -155,7 +155,7 @@
         <p>&#124;</p>
         <p class="italic text-slate-900">2014 - 2016</p>
       </div>
-      <ul class="text-sm text-slate-500 flex flex-col gap-y-2 ml-1 mt-1">
+      <ul class="text-sm text-slate-700 flex flex-col gap-y-2 ml-1 mt-1">
         <li class="flex gap-x-3 items-center">
           <span class="rounded-full inline-block w-2 h-2 bg-blue-400"></span>
           <p>Delivered frontend applications for higher-education institutions</p>

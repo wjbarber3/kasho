@@ -1,5 +1,5 @@
 <template>
-  <div class="max-w-3xl grid md:grid-cols-2 w-full items-center pt-16 md:pt-10">
+  <main class="max-w-3xl grid md:grid-cols-2 w-full items-center pt-16 md:pt-10">
     <img src="/images/hero2.webp" class="w-[90%] hidden md:block" alt="hero-image" />
     <div class="flex items-center justify-center px-6">
       <div class="max-w-3xl w-full">
@@ -35,7 +35,7 @@
 
       </div>
     </div>
-  </div>
+  </main>
 </template>
 
 <script setup>

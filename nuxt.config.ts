@@ -17,7 +17,7 @@ export default defineNuxtConfig({
       tailwindcss(),
     ],
   },
-  modules: ['@nuxt/fonts', '@primevue/nuxt-module'],
+  modules: ['@nuxt/fonts', '@primevue/nuxt-module', '@nuxtjs/sitemap', '@nuxtjs/robots'],
   fonts: {
     families: [
       // Optional: specify families and weights for better control
@@ -25,6 +25,23 @@ export default defineNuxtConfig({
       { name: 'Geist', weights: [400, 500, 600, 700], display: 'swap' },
     ]
     // Other configuration options can be found in the documentation
+  },
+  site: {
+    url: 'https://www.jrdnbrbr.com',
+    name: 'Jordan Barber Portfolio'
+  },
+  sitemap: {
+    autoLastmod: true,
+    discoverImages: true
+  },
+  robots: {
+    groups: [
+      {
+        userAgent: '*',
+        allow: ['/']
+      }
+    ],
+    sitemap: 'https://www.jrdnbrbr.com/sitemap.xml'
   },
   primevue: {
     options: {

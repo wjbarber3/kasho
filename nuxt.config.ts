@@ -9,8 +9,14 @@ export default defineNuxtConfig({
     head: {
       htmlAttrs: {
         lang: 'en'
-      }
-    }
+      },
+      meta: [
+        {
+          name: 'google-site-verification',
+          content: 'sq5kjbR0hp_MBvR46AUURrLC3RiGhxEbzL6jF2uEAyQ'
+        }
+      ]
+    },
   },
   vite: {
     plugins: [

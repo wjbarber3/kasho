@@ -36,7 +36,7 @@
     <div class="flex item-center justify-center gap-x-4">
       <div class="flex items-center w-full gap-x-2 justify-center">
         <span>Show Annotations</span>
-        <ToggleSwitch v-model="showAnnotations" />
+        <ToggleSwitch v-model="showAnnotations" aria-label="Toggle Annotations" />
       </div>
     </div>
     <div class="flex items-center justify-center w-full gap-x-2 text-xs italic">

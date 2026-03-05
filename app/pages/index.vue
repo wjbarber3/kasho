@@ -62,10 +62,38 @@
 <script setup></script>
 
 <script setup>
+  useSeoMeta({
+    title: 'Jordan Barber | Senior Frontend Engineer',
+    description: 'Jordan Barber is a Senior Frontend Engineer specializing in design systems, frontend architecture, performance optimization, and interactive data visualization with D3 and modern JavaScript.',
+
+    ogTitle: 'Jordan Barber — Senior Frontend Engineer',
+    ogDescription: 'Frontend architecture, design systems, and data visualization. 13+ years building high-performance web applications.',
+    ogType: 'website',
+    ogUrl: 'https://www.jrdnbrbr.com/',
+    ogImage: 'https://www.jrdnbrbr.com/social-preview.jpg',
+
+    twitterCard: 'summary_large_image',
+    twitterTitle: 'Jordan Barber — Senior Frontend Engineer',
+    twitterDescription: 'Frontend architecture, design systems, and data visualization with D3 and modern JavaScript.',
+    twitterImage: 'https://www.jrdnbrbr.com/social-preview.jpg'
+  })
+
   useHead({
-    title: 'Jordan Barber | Portfolio',
-    meta: [
-      { name: 'description', content: 'Jordan Barber - Senior Frontend Engineer' }
+    script: [
+      {
+        type: 'application/ld+json',
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Person",
+          name: "Jordan Barber",
+          url: "https://www.jrdnbrbr.com",
+          jobTitle: "Senior Frontend Engineer",
+          email: "wjbarber3@gmail.com",
+          sameAs: [
+            "https://www.linkedin.com/in/jrdnbrbr"
+          ]
+        })
+      }
     ]
   })
 </script>

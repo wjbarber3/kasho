@@ -36,7 +36,7 @@ If that’s where you’re headed, I'd love to talk.
       >
         <div class="grid grid-cols-2 w-full gap-4">
             <div class="col-span-2">
-              <InputText name="fullName" type="text" placeholder="Full Name" fluid />
+              <InputText name="fullName" type="text" placeholder="Full Name" fluid aria-label="Full Name" />
               <Message v-if="$form.fullName?.invalid" severity="error" size="small" variant="simple">{{ $form.fullName?.error?.message }}</Message>
             </div>
             <div>
@@ -46,6 +46,7 @@ If that’s where you’re headed, I'd love to talk.
                 autocomplete="tel"
                 placeholder="Phone"
                 fluid
+                aria-label="Phone"
               />
               <Message v-if="$form.phone?.invalid" severity="error" size="small" variant="simple">{{ $form.phone.error?.message }}</Message>
             </div>
@@ -56,15 +57,16 @@ If that’s where you’re headed, I'd love to talk.
                 autocomplete="email"
                 placeholder="Email"
                 fluid
+                aria-label="Email"
               />
               <Message v-if="$form.email?.invalid" severity="error" size="small" variant="simple">{{ $form.email.error?.message }}</Message>
             </div>
             <div class="col-span-2">
-              <InputText name="subject" type="text" placeholder="Subject" fluid />
+              <InputText name="subject" type="text" placeholder="Subject" fluid aria-label="Subject" />
               <Message v-if="$form.subject?.invalid" severity="error" size="small" variant="simple">{{ $form.subject.error?.message }}</Message>
             </div>
             <div class="col-span-2">
-              <Textarea name="message" type="text" placeholder="Message" fluid class="h-20" />
+              <Textarea name="message" type="text" placeholder="Message" fluid class="h-20" aria-label="Message" />
               <Message v-if="$form.message?.invalid" severity="error" size="small" variant="simple">{{ $form.message.error?.message }}</Message>
             </div>
         </div>

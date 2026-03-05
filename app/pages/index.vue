@@ -82,15 +82,22 @@
     script: [
       {
         type: 'application/ld+json',
-        children: JSON.stringify({
+        innerHTML: JSON.stringify({
           "@context": "https://schema.org",
           "@type": "Person",
           name: "Jordan Barber",
           url: "https://www.jrdnbrbr.com",
           jobTitle: "Senior Frontend Engineer",
-          email: "wjbarber3@gmail.com",
           sameAs: [
+            "https://github.com/jrdnbrbr",
             "https://www.linkedin.com/in/jrdnbrbr"
+          ],
+          knowsAbout: [
+            "Frontend Engineering",
+            "JavaScript",
+            "React",
+            "D3.js",
+            "Design Systems"
           ]
         })
       }

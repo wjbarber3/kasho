@@ -28,7 +28,7 @@
   
         <!-- Contact -->
         <div>
-          <h3 class="text-lg font-semibold text-gray-900 mb-6">Get in touch.</h3>
+          <p class="text-lg font-semibold text-gray-900 mb-6">Get in touch.</p>
           <div class="space-y-4 flex md:inline-block flex-col items-center">
             <a href="tel:+18647209494" class="hover:text-blue-500 flex items-center gap-x-3">
               <i class="pi pi-phone text-blue-500"></i>

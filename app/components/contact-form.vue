@@ -200,8 +200,16 @@ const onFormSubmit = async ({ valid, values, reset }) => {
 
 <style>
 
-.p-inputtext.p-invalid {
-  color: rgb(248, 113, 113);
+@reference "tailwindcss";
+
+.p-inputtext.p-invalid,
+.p-inputtextarea.p-invalid {
+  @apply border-red-400 bg-red-50 text-red-900 placeholder-red-300;
+}
+
+.p-inputtext.p-invalid:focus,
+.p-inputtextarea.p-invalid:focus {
+  @apply ring-2 ring-red-300 border-red-500;
 }
 
 </style>

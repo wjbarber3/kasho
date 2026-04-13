@@ -40,7 +40,7 @@
         </li>
         <li class="flex gap-x-3 items-center">
           <span class="rounded-full inline-block w-2 h-2 bg-blue-400"></span>
-          <p>Integrated AI-assisted development workflows to accelerate UI delivery and reduce iteration time</p>
+          <p>Integrated AI-assisted workflows to accelerate UI delivery</p>
         </li>
         <li class="flex gap-x-3 items-center">
           <span class="rounded-full inline-block w-2 h-2 bg-blue-400"></span>

@@ -38,10 +38,10 @@
           <span class="rounded-full inline-block w-2 h-2 bg-blue-400"></span>
           <p>Led frontend initiatives at a Series C startup</p>
         </li>
-        <!-- <li class="flex gap-x-3 items-center">
+        <li class="flex gap-x-3 items-center">
           <span class="rounded-full inline-block w-2 h-2 bg-blue-400"></span>
-          <p>Designed and maintained a micro-frontend architecture using Nuxt, Tailwind, and Apollo Client</p>
-        </li> -->
+          <p>Integrated AI-assisted development workflows to accelerate UI delivery and reduce iteration time</p>
+        </li>
         <li class="flex gap-x-3 items-center">
           <span class="rounded-full inline-block w-2 h-2 bg-blue-400"></span>
           <p>Built and maintained a GraphQL Node service layer</p>
@@ -52,7 +52,7 @@
         </li>
         <li class="flex gap-x-3 items-center">
           <span class="rounded-full inline-block w-2 h-2 bg-blue-400"></span>
-          <p>Architected product analytics pipelines.</p>
+          <p>Architected product analytics pipelines</p>
         </li>
         <li class="flex gap-x-3 items-center">
           <span class="rounded-full inline-block w-2 h-2 bg-blue-400"></span>
@@ -122,7 +122,7 @@
       <ul class="text-sm text-slate-700 flex flex-col gap-y-2 ml-1 mt-1">
         <li class="flex gap-x-3 items-center">
           <span class="rounded-full inline-block w-2 h-2 bg-blue-400"></span>
-          <p>Delivered frontend solutions across React, Vue, Angular, and Aurelia</p>
+          <p>Delivered frontend solutions across React, Vue and Angular</p>
         </li>
         <li class="flex gap-x-3 items-center">
           <span class="rounded-full inline-block w-2 h-2 bg-blue-400"></span>

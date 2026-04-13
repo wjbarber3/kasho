@@ -18,7 +18,7 @@
         <!-- Supporting Text -->
         <p class="text-lg text-gray-600 leading-relaxed">
           I <span class="bg-violet-200 px-1">design and scale frontend systems</span> that help teams move faster and products perform better.
-          I specialize in architecture, design systems, and performance-driven user experiences.
+          I specialize in architecture, design systems, AI-assisted, agentic workflows and performance-driven user experiences.
         </p>
 
         <div class="flex items-center gap-x-8 mt-6">
